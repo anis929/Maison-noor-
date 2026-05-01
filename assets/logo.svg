@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 272" fill="none" stroke="#C4938E" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Outer oval border -->
+  <ellipse cx="100" cy="136" rx="84" ry="118" stroke-width="2"/>
+
+  <!-- Concentric arch lines (crown effect, top half) -->
+  <path d="M 24 136 C 24 20 176 20 176 136" stroke-width="1.5"/>
+  <path d="M 37 136 C 37 38 163 38 163 136" stroke-width="1.4"/>
+  <path d="M 51 136 C 51 57 149 57 149 136" stroke-width="1.3"/>
+  <path d="M 65 136 C 65 76 135 76 135 136" stroke-width="1.2"/>
+
+  <!-- MN monogram — M -->
+  <polyline points="40,185 40,122 78,158 116,122 116,185" stroke-width="2.4" stroke-linecap="square"/>
+  <!-- MN monogram — N -->
+  <polyline points="104,185 104,122 160,185 160,122" stroke-width="2.4" stroke-linecap="square"/>
+
+  <!-- Three sinusoidal wave lines (bottom) -->
+  <path d="M 26,205 C 50,195 72,215 100,205 C 128,195 150,215 174,205" stroke-width="1.5"/>
+  <path d="M 30,220 C 53,210 75,230 100,220 C 125,210 147,230 170,220" stroke-width="1.4"/>
+  <path d="M 34,235 C 57,225 78,245 100,235 C 122,225 143,245 166,235" stroke-width="1.3"/>
+</svg>

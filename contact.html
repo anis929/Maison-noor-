@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | Maison Noor</title>
+  <meta name="description" content="Contactez Maison Noor — lunetterie de luxe à Paris. Service Couture, informations collection, presse, partenariats.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+<div id="page-transition"></div>
+<div id="cursor" aria-hidden="true"></div>
+
+<!-- NAVIGATION -->
+<nav id="nav" aria-label="Navigation principale">
+  <a href="index.html" class="nav-logo">
+    <img src="assets/logo.svg" alt="Logo Maison Noor" width="40" height="56">
+    <span class="nav-wordmark">Maison Noor</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Le Seuil</a></li>
+    <li><a href="atelier.html">Atelier</a></li>
+    <li><a href="collection.html">Collection</a></li>
+    <li><a href="maison.html">La Maison</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="rendez-vous.html" class="btn btn-chrome btn-arrow">Rendez-vous</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div id="nav-backdrop" aria-hidden="true"></div>
+<div id="nav-drawer" role="dialog" aria-modal="true" aria-label="Menu">
+  <button id="drawer-close" class="btn btn-ghost">✕</button>
+  <ul class="drawer-links">
+    <li><a href="index.html">Le Seuil</a></li>
+    <li><a href="atelier.html">Atelier</a></li>
+    <li><a href="collection.html">Collection</a></li>
+    <li><a href="maison.html">La Maison</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="rendez-vous.html">Rendez-vous</a></li>
+  </ul>
+</div>
+
+<!-- CONTACT PAGE -->
+<main id="contact-page">
+  <!-- Left — Info -->
+  <div class="contact-info">
+    <p class="mono-label reveal" style="margin-bottom: 1rem;">Contact</p>
+    <h1 class="heading-md reveal reveal-delay-1" style="margin-bottom: 2.5rem; max-width: 18ch;">
+      Parlons de votre regard.
+    </h1>
+
+    <div class="contact-item reveal reveal-delay-2">
+      <div class="contact-item-icon" aria-hidden="true">@</div>
+      <div>
+        <p class="contact-item-label">Email</p>
+        <a href="mailto:hello@maisonnoor.com" class="contact-item-value">hello@maisonnoor.com</a>
+      </div>
+    </div>
+
+    <div class="contact-item reveal reveal-delay-3">
+      <div class="contact-item-icon" aria-hidden="true">☎</div>
+      <div>
+        <p class="contact-item-label">Téléphone</p>
+        <a href="tel:+33140000000" class="contact-item-value">+33 1 40 00 00 00</a>
+        <p class="text-dim" style="font-size: 0.75rem; margin-top: 0.25rem;">Lun — Ven, 10h — 18h</p>
+      </div>
+    </div>
+
+    <div class="contact-item reveal">
+      <div class="contact-item-icon" aria-hidden="true">◎</div>
+      <div>
+        <p class="contact-item-label">Atelier</p>
+        <p class="contact-item-value">Paris 10e, France</p>
+        <p class="text-dim" style="font-size: 0.75rem; margin-top: 0.25rem;">Sur rendez-vous uniquement</p>
+      </div>
+    </div>
+
+    <div class="contact-item reveal reveal-delay-1">
+      <div class="contact-item-icon" aria-hidden="true">✦</div>
+      <div>
+        <p class="contact-item-label">Presse &amp; Partenariats</p>
+        <a href="mailto:presse@maisonnoor.com" class="contact-item-value">presse@maisonnoor.com</a>
+      </div>
+    </div>
+
+    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06);">
+      <p class="mono-label dim reveal" style="margin-bottom: 1rem;">Urgence SAV</p>
+      <p class="text-soft reveal reveal-delay-1" style="font-size: 0.8125rem; line-height: 1.7; max-width: 36ch;">
+        Pour toute question concernant votre monture Maison Noor — réparation, ajustement, remplacement — notre équipe répond sous 24h.
+      </p>
+      <a href="mailto:sav@maisonnoor.com" class="btn btn-ghost btn-arrow reveal reveal-delay-2" style="margin-top: 1rem;">sav@maisonnoor.com</a>
+    </div>
+  </div>
+
+  <!-- Right — Form -->
+  <div class="contact-form-wrap">
+    <p class="mono-label dim reveal" style="margin-bottom: 2rem;">Formulaire de contact</p>
+
+    <form id="contact-form" novalidate>
+      <div class="form-grid">
+        <div class="form-group reveal">
+          <label class="form-label" for="contact-prenom">Prénom</label>
+          <input type="text" id="contact-prenom" name="prenom" class="form-input" placeholder="Votre prénom" autocomplete="given-name">
+        </div>
+        <div class="form-group reveal reveal-delay-1">
+          <label class="form-label" for="contact-nom">Nom</label>
+          <input type="text" id="contact-nom" name="nom" class="form-input" placeholder="Votre nom" autocomplete="family-name">
+        </div>
+      </div>
+
+      <div class="form-group reveal reveal-delay-2">
+        <label class="form-label" for="contact-email">Email</label>
+        <input type="email" id="contact-email" name="email" class="form-input" placeholder="votre@email.com" autocomplete="email">
+      </div>
+
+      <div class="form-group reveal">
+        <label class="form-label" for="contact-sujet">Sujet</label>
+        <select id="contact-sujet" name="sujet" class="form-select form-input">
+          <option value="">Sélectionner un sujet</option>
+          <option value="rdv">Demande de rendez-vous</option>
+          <option value="collection">Information collection</option>
+          <option value="sav">Service après-vente</option>
+          <option value="presse">Presse &amp; médias</option>
+          <option value="partenariat">Partenariat</option>
+          <option value="autre">Autre</option>
+        </select>
+      </div>
+
+      <div class="form-group reveal reveal-delay-1">
+        <label class="form-label" for="contact-message">Message</label>
+        <textarea id="contact-message" name="message" class="form-textarea" placeholder="Votre message..." rows="6"></textarea>
+      </div>
+
+      <div class="reveal reveal-delay-2" style="margin-top: 0.5rem;">
+        <p class="text-dim" style="font-size: 0.75rem; margin-bottom: 1.5rem;">
+          En soumettant ce formulaire, vous acceptez notre <a href="legal.html#rgpd" style="color: var(--creme-os); text-decoration: underline;">politique de confidentialité</a>.
+        </p>
+        <button type="submit" class="btn btn-filled btn-arrow">Envoyer le message</button>
+      </div>
+    </form>
+
+    <div id="contact-success" style="display:none; padding: 3rem 0; text-align: center;">
+      <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(166,124,82,0.15); border: 1px solid var(--corne-clair); display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; font-size: 1.5rem; color: var(--corne-clair);">✓</div>
+      <h2 class="heading-sm" style="margin-bottom: 1rem;">Message envoyé.</h2>
+      <p class="text-soft" style="max-width: 40ch; margin: 0 auto; font-size: 0.9375rem; line-height: 1.7;">
+        Nous vous répondrons dans les 48 heures ouvrées. Merci de votre confiance.
+      </p>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer id="footer" role="contentinfo">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <img src="assets/logo.svg" alt="Logo Maison Noor" width="32" height="45">
+        <span class="footer-brand-name">Maison Noor</span>
+      </div>
+      <p class="footer-tagline">Lunetterie de luxe française. Artisanat ancestral × esthétique rétro-futuriste. Paris, Est. 2024.</p>
+    </div>
+    <nav>
+      <p class="footer-nav-title">Navigation</p>
+      <ul class="footer-nav-links">
+        <li><a href="atelier.html">Atelier</a></li>
+        <li><a href="collection.html">Collection</a></li>
+        <li><a href="maison.html">La Maison</a></li>
+        <li><a href="rendez-vous.html">Rendez-vous</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <nav>
+      <p class="footer-nav-title">Légal</p>
+      <ul class="footer-nav-links">
+        <li><a href="legal.html">Mentions légales</a></li>
+        <li><a href="legal.html#rgpd">Données personnelles</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p class="footer-nav-title">Newsletter</p>
+      <p class="footer-tagline" style="margin-bottom: 1rem;">Avant-premières et invitations privées.</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="votre@email.com" class="newsletter-input" aria-label="Email">
+        <button type="submit" class="newsletter-submit">→</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2024 Maison Noor SAS. Tous droits réservés.</p>
+    <ul class="footer-legal">
+      <li><a href="legal.html">Mentions légales</a></li>
+      <li><a href="legal.html#rgpd">RGPD</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+  const contactForm = document.getElementById('contact-form');
+  const contactSuccess = document.getElementById('contact-success');
+  contactForm?.addEventListener('submit', e => {
+    e.preventDefault();
+    contactForm.style.display = 'none';
+    contactSuccess.style.display = 'block';
+  });
+</script>
+</body>
+</html>

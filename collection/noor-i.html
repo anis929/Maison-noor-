@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noor I — Ovale, Corne de buffle | Maison Noor</title>
+  <meta name="description" content="Noor I : silhouette ovale en corne de buffle naturelle. Édition limitée 24 exemplaires. La pièce fondatrice de Maison Noor.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+<div id="page-transition"></div>
+<div id="cursor" aria-hidden="true"></div>
+
+<!-- NAVIGATION -->
+<nav id="nav" aria-label="Navigation principale">
+  <a href="../index.html" class="nav-logo">
+    <img src="../assets/logo.svg" alt="Logo Maison Noor" width="40" height="56">
+    <span class="nav-wordmark">Maison Noor</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Le Seuil</a></li>
+    <li><a href="../atelier.html">Atelier</a></li>
+    <li><a href="../collection.html" class="active">Collection</a></li>
+    <li><a href="../maison.html">La Maison</a></li>
+    <li><a href="../contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="../rendez-vous.html" class="btn btn-chrome btn-arrow">Rendez-vous</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div id="nav-backdrop" aria-hidden="true"></div>
+<div id="nav-drawer" role="dialog" aria-modal="true" aria-label="Menu">
+  <button id="drawer-close" class="btn btn-ghost">✕</button>
+  <ul class="drawer-links">
+    <li><a href="../index.html">Le Seuil</a></li>
+    <li><a href="../atelier.html">Atelier</a></li>
+    <li><a href="../collection.html">Collection</a></li>
+    <li><a href="../maison.html">La Maison</a></li>
+    <li><a href="../contact.html">Contact</a></li>
+    <li><a href="../rendez-vous.html">Rendez-vous</a></li>
+  </ul>
+</div>
+
+<!-- PRODUCT DETAIL -->
+<article id="product-detail">
+  <!-- Left: 3D Viewer -->
+  <div class="product-viewer" aria-label="Visualisation interactive — glissez pour pivoter">
+    <div class="product-3d-scene">
+      <div class="product-3d-object" role="img" aria-label="Monture Noor I, silhouette ovale en corne de buffle">
+        <div class="product-3d-lens left"></div>
+        <div class="product-3d-lens right"></div>
+      </div>
+    </div>
+    <p class="viewer-hint" aria-hidden="true">Glissez pour pivoter</p>
+  </div>
+
+  <!-- Right: Info -->
+  <div class="product-info-panel">
+    <!-- Breadcrumb -->
+    <nav class="product-breadcrumb" aria-label="Fil d'Ariane">
+      <a href="../index.html">Accueil</a>
+      <span aria-hidden="true">/</span>
+      <a href="../collection.html">Collection</a>
+      <span aria-hidden="true">/</span>
+      <span>Noor I</span>
+    </nav>
+
+    <p class="mono-label dim reveal" style="margin-bottom: 0.75rem;">N° 01 / 24 — Édition limitée</p>
+    <h1 class="product-detail-name reveal reveal-delay-1">Noor I</h1>
+    <p class="product-detail-price reveal reveal-delay-2">2 400 €</p>
+
+    <p class="product-detail-desc reveal reveal-delay-3">
+      La pièce fondatrice. Une silhouette ovale aux proportions parfaites, taillée dans une corne de buffle aux veines brun-or. Vingt-quatre exemplaires dans le monde, chacun unique.
+    </p>
+
+    <!-- Specs -->
+    <table class="specs-table reveal">
+      <tbody>
+        <tr>
+          <td>Forme</td>
+          <td>Ovale</td>
+        </tr>
+        <tr>
+          <td>Matière</td>
+          <td>Corne de buffle naturelle</td>
+        </tr>
+        <tr>
+          <td>Couleur</td>
+          <td>Brun-or naturel</td>
+        </tr>
+        <tr>
+          <td>Genre</td>
+          <td>Mixte</td>
+        </tr>
+        <tr>
+          <td>Édition</td>
+          <td>24 exemplaires</td>
+        </tr>
+        <tr>
+          <td>Pont</td>
+          <td>19 mm</td>
+        </tr>
+        <tr>
+          <td>Largeur de verre</td>
+          <td>54 mm</td>
+        </tr>
+        <tr>
+          <td>Longueur de branche</td>
+          <td>145 mm</td>
+        </tr>
+        <tr>
+          <td>Garantie</td>
+          <td>À vie</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Story -->
+    <div class="reveal" style="padding: 1.5rem; border: 1px solid rgba(255,255,255,0.06); border-radius: 2px; margin-bottom: 2rem;">
+      <p class="mono-label dim" style="margin-bottom: 0.75rem;">Histoire de la pièce</p>
+      <p class="text-soft" style="font-size: 0.8125rem; line-height: 1.75;">
+        La Noor I est née d'un fragment de corne récolté dans les hauts plateaux du Vietnam. Sa teinte brun-or est apparue naturellement au polissage — nous n'avons rien décidé, nous avons seulement révélé.
+      </p>
+    </div>
+
+    <!-- CTA -->
+    <div class="reveal" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <a href="../rendez-vous.html" class="btn btn-filled btn-arrow">Acquérir cette pièce</a>
+      <a href="../contact.html" class="btn btn-chrome">Poser une question</a>
+    </div>
+
+    <p class="text-dim reveal" style="font-size: 0.75rem; margin-top: 1.5rem;">
+      Livraison sous 8 à 12 semaines. Ajustement inclus. Certificat d'authenticité et carnet de naissance.
+    </p>
+  </div>
+</article>
+
+<!-- RELATED PRODUCTS -->
+<section style="padding: var(--section-pad-y) var(--section-pad-x); border-top: 1px solid rgba(255,255,255,0.05);">
+  <div class="section-header reveal" style="margin-bottom: 2.5rem;">
+    <div>
+      <p class="mono-label" style="margin-bottom: 0.5rem;">Dans la même collection</p>
+      <h2 class="heading-sm">Vous pourriez aussi aimer</h2>
+    </div>
+    <a href="../collection.html" class="btn btn-ghost btn-arrow">Tout voir</a>
+  </div>
+
+  <div class="products-grid">
+    <a href="noor-ii.html" class="product-card reveal">
+      <div class="product-img-wrap">
+        <div class="product-placeholder"></div>
+        <span class="product-badge">N° 02 / 24</span>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Noor II</h3>
+        <p class="product-meta">Rectangulaire · Titane · Homme</p>
+        <div class="product-footer">
+          <span class="product-price">2 800 €</span>
+          <span class="product-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="corne-ii.html" class="product-card reveal reveal-delay-1">
+      <div class="product-img-wrap">
+        <div class="product-placeholder"></div>
+        <span class="product-badge">N° 07 / 24</span>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Corne II</h3>
+        <p class="product-meta">Ovale · Corne de buffle · Femme</p>
+        <div class="product-footer">
+          <span class="product-price">2 900 €</span>
+          <span class="product-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="serie-15.html" class="product-card reveal reveal-delay-2">
+      <div class="product-img-wrap">
+        <div class="product-placeholder"></div>
+        <span class="product-badge">N° 04 / 24</span>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Série 15</h3>
+        <p class="product-meta">Papillon · Corne de buffle · Femme</p>
+        <div class="product-footer">
+          <span class="product-price">3 200 €</span>
+          <span class="product-arrow">→</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer" role="contentinfo">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <img src="../assets/logo.svg" alt="Logo Maison Noor" width="32" height="45">
+        <span class="footer-brand-name">Maison Noor</span>
+      </div>
+      <p class="footer-tagline">Lunetterie de luxe française. Artisanat ancestral × esthétique rétro-futuriste. Paris, Est. 2024.</p>
+    </div>
+    <nav>
+      <p class="footer-nav-title">Navigation</p>
+      <ul class="footer-nav-links">
+        <li><a href="../atelier.html">Atelier</a></li>
+        <li><a href="../collection.html">Collection</a></li>
+        <li><a href="../maison.html">La Maison</a></li>
+        <li><a href="../rendez-vous.html">Rendez-vous</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <nav>
+      <p class="footer-nav-title">Légal</p>
+      <ul class="footer-nav-links">
+        <li><a href="../legal.html">Mentions légales</a></li>
+        <li><a href="../legal.html#rgpd">Données personnelles</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p class="footer-nav-title">Newsletter</p>
+      <p class="footer-tagline" style="margin-bottom: 1rem;">Avant-premières et invitations privées.</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="votre@email.com" class="newsletter-input" aria-label="Email">
+        <button type="submit" class="newsletter-submit">→</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2024 Maison Noor SAS. Tous droits réservés.</p>
+    <ul class="footer-legal">
+      <li><a href="../legal.html">Mentions légales</a></li>
+      <li><a href="../legal.html#rgpd">RGPD</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

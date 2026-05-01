@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atelier — Service Couture | Maison Noor</title>
+  <meta name="description" content="Le Service Couture Maison Noor : notre maître-lunetier se déplace chez vous. Cinq étapes, un rituel. Sur-mesure en corne de buffle ancestrale.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+<div id="page-transition"></div>
+<div id="cursor" aria-hidden="true"></div>
+
+<!-- NAVIGATION -->
+<nav id="nav" aria-label="Navigation principale">
+  <a href="index.html" class="nav-logo" aria-label="Maison Noor — Accueil">
+    <img src="assets/logo.svg" alt="Logo Maison Noor" width="40" height="56">
+    <span class="nav-wordmark">Maison Noor</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Le Seuil</a></li>
+    <li><a href="atelier.html" class="active">Atelier</a></li>
+    <li><a href="collection.html">Collection</a></li>
+    <li><a href="maison.html">La Maison</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="rendez-vous.html" class="btn btn-chrome btn-arrow">Rendez-vous</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div id="nav-backdrop" aria-hidden="true"></div>
+<div id="nav-drawer" role="dialog" aria-modal="true" aria-label="Menu">
+  <button id="drawer-close" class="btn btn-ghost">✕</button>
+  <ul class="drawer-links">
+    <li><a href="index.html">Le Seuil</a></li>
+    <li><a href="atelier.html">Atelier</a></li>
+    <li><a href="collection.html">Collection</a></li>
+    <li><a href="maison.html">La Maison</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="rendez-vous.html">Rendez-vous</a></li>
+  </ul>
+</div>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <p class="mono-label reveal" style="margin-bottom: 1rem;">Service Couture</p>
+  <h1 class="heading-lg reveal reveal-delay-1" style="max-width: 18ch;">
+    Le rituel du regard parfait.
+  </h1>
+  <p class="text-soft reveal reveal-delay-2" style="max-width: 52ch; margin-top: 1.5rem; font-size: 0.9375rem; line-height: 1.75;">
+    Notre maître-lunetier se déplace dans votre espace de vie. Une cérémonie intime, un dialogue entre vos désirs et la matière. Cinq étapes pour une paire définitive.
+  </p>
+</section>
+
+<!-- STICKY RITUAL -->
+<section id="ritual" aria-label="Les cinq étapes du rituel">
+  <!-- Sticky left panel -->
+  <div class="ritual-sticky">
+    <div class="ritual-image-wrap">
+      <!-- Step images (color-coded placeholders) -->
+      <div class="ritual-image active" id="ritual-img-0" style="background: linear-gradient(160deg, #2B1810, #6B4423);">
+        <p class="mono-label" style="color: rgba(232,220,196,0.3);">Rencontre</p>
+      </div>
+      <div class="ritual-image" id="ritual-img-1" style="background: linear-gradient(160deg, #141414, #2B1810);">
+        <p class="mono-label" style="color: rgba(232,220,196,0.3);">Analyse</p>
+      </div>
+      <div class="ritual-image" id="ritual-img-2" style="background: linear-gradient(160deg, #6B4423, #A67C52);">
+        <p class="mono-label" style="color: rgba(232,220,196,0.3);">Sélection</p>
+      </div>
+      <div class="ritual-image" id="ritual-img-3" style="background: linear-gradient(160deg, #2B1810, #141414);">
+        <p class="mono-label" style="color: rgba(232,220,196,0.3);">Fabrication</p>
+      </div>
+      <div class="ritual-image" id="ritual-img-4" style="background: linear-gradient(160deg, #0A0A0A, #2B1810);">
+        <p class="mono-label" style="color: rgba(232,220,196,0.3);">Livraison</p>
+      </div>
+    </div>
+
+    <div>
+      <p class="mono-label dim">Le Service Couture</p>
+      <p class="text-soft" style="font-size: 0.8125rem; margin-top: 0.5rem; max-width: 36ch;">
+        À domicile, sur invitation. Délai moyen : 8 semaines.
+      </p>
+    </div>
+  </div>
+
+  <!-- Scrolling steps -->
+  <div class="ritual-scrolls">
+    <div class="ritual-step active" id="step-0">
+      <p class="step-num">Étape 01 / 05</p>
+      <h2 class="step-title">La Rencontre</h2>
+      <p class="step-text">
+        Notre maître-lunetier arrive chez vous avec sa collection d'échantillons et de références. Une conversation sans urgence, au rythme de vos envies. Nous apprenons à vous connaître — votre style de vie, vos habitudes, votre histoire.
+      </p>
+    </div>
+
+    <div class="ritual-step" id="step-1">
+      <p class="step-num">Étape 02 / 05</p>
+      <h2 class="step-title">L'Analyse du Visage</h2>
+      <p class="step-text">
+        Morphologie, teinte de peau, architecture des pommettes — chaque mesure est prise à la main. Nous définissons ensemble la géométrie idéale qui va révéler votre regard. Science et intuition.
+      </p>
+    </div>
+
+    <div class="ritual-step" id="step-2">
+      <p class="step-num">Étape 03 / 05</p>
+      <h2 class="step-title">Le Choix de la Matière</h2>
+      <p class="step-text">
+        Chaque corne de buffle est unique — ses veines, ses nuances de brun chaud ou de blond doré. Vous choisissez votre fragment de nature. Titane japonais pour les âmes contemporaines. Acétate d'origine végétale pour les esprits botaniques.
+      </p>
+    </div>
+
+    <div class="ritual-step" id="step-3">
+      <p class="step-num">Étape 04 / 05</p>
+      <h2 class="step-title">La Fabrication</h2>
+      <p class="step-text">
+        Huit semaines dans notre atelier parisien. Chaque pièce est taillée, polie, ajustée à la main. Les charnières sont assemblées une par une. Votre numéro de série est gravé discrètement sur la branche intérieure.
+      </p>
+    </div>
+
+    <div class="ritual-step" id="step-4">
+      <p class="step-num">Étape 05 / 05</p>
+      <h2 class="step-title">La Remise</h2>
+      <p class="step-text">
+        Nous revenons chez vous pour la remise officielle. Ajustements de précision, réglage des branches — jusqu'à la perfection millimétrée. Votre monture s'accompagne d'un carnet de naissance et d'une garantie à vie.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- MATERIAL SECTION -->
+<section id="material" aria-label="La corne de buffle">
+  <div class="material-image">
+    <div style="text-align:center; opacity: 0.4;">
+      <img src="assets/logo.svg" alt="" width="60" style="opacity: 0.3; filter: brightness(0.5);">
+    </div>
+  </div>
+
+  <div class="material-content">
+    <p class="mono-label reveal">La matière</p>
+    <h2 class="heading-md reveal reveal-delay-1">La corne de buffle.<br>Vivante, unique.</h2>
+    <p class="text-soft reveal reveal-delay-2" style="font-size: 0.9375rem; line-height: 1.75; max-width: 46ch;">
+      Récoltée selon des pratiques éthiques en Asie du Sud-Est, chaque corne de buffle porte en elle des millénaires. Sa structure lamellaire est plus légère que l'acétate et s'adapte naturellement à la chaleur du corps humain.
+    </p>
+
+    <div class="material-stats reveal reveal-delay-3">
+      <div class="stat-item">
+        <p class="stat-value">2 g</p>
+        <p class="stat-label">Poids moyen par monture</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-value">0%</p>
+        <p class="stat-label">Plastique · Produits chimiques</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-value">∞</p>
+        <p class="stat-label">Unicité de chaque pièce</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-value">100%</p>
+        <p class="stat-label">Traçabilité garantie</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PIECES GALLERY -->
+<section id="pieces-gallery" class="section-pad">
+  <div class="section-header reveal">
+    <div>
+      <p class="mono-label" style="margin-bottom: 0.5rem;">Pièces uniques</p>
+      <h2 class="heading-md">Chaque monture<br>est une œuvre.</h2>
+    </div>
+    <a href="rendez-vous.html" class="btn btn-chrome btn-arrow">Prendre rendez-vous</a>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item reveal">
+      <div class="gallery-placeholder"></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-1">
+      <div class="gallery-placeholder"></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-2">
+      <div class="gallery-placeholder"></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-3">
+      <div class="gallery-placeholder"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top: 4rem;">
+    <a href="rendez-vous.html" class="btn btn-filled btn-arrow">Commencer le rituel</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer" role="contentinfo">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <img src="assets/logo.svg" alt="Logo Maison Noor" width="32" height="45">
+        <span class="footer-brand-name">Maison Noor</span>
+      </div>
+      <p class="footer-tagline">Lunetterie de luxe française. Artisanat ancestral × esthétique rétro-futuriste. Paris, Est. 2024.</p>
+    </div>
+    <nav>
+      <p class="footer-nav-title">Navigation</p>
+      <ul class="footer-nav-links">
+        <li><a href="atelier.html">Atelier</a></li>
+        <li><a href="collection.html">Collection</a></li>
+        <li><a href="maison.html">La Maison</a></li>
+        <li><a href="rendez-vous.html">Rendez-vous</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <nav>
+      <p class="footer-nav-title">Légal</p>
+      <ul class="footer-nav-links">
+        <li><a href="legal.html">Mentions légales</a></li>
+        <li><a href="legal.html#rgpd">Données personnelles</a></li>
+        <li><a href="legal.html#cookies">Cookies</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p class="footer-nav-title">Newsletter</p>
+      <p class="footer-tagline" style="margin-bottom: 1rem;">Avant-premières et invitations privées.</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="votre@email.com" class="newsletter-input" aria-label="Email">
+        <button type="submit" class="newsletter-submit">→</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2024 Maison Noor SAS. Tous droits réservés.</p>
+    <ul class="footer-legal">
+      <li><a href="legal.html">Mentions légales</a></li>
+      <li><a href="legal.html#rgpd">RGPD</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

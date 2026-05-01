@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Maison — Histoire & Vision | Maison Noor</title>
+  <meta name="description" content="L'histoire de Maison Noor : naissance d'une maison de lunetterie de luxe à Paris, entre héritage artisanal et vision contemporaine.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+<div id="page-transition"></div>
+<div id="cursor" aria-hidden="true"></div>
+
+<!-- NAVIGATION -->
+<nav id="nav" aria-label="Navigation principale">
+  <a href="index.html" class="nav-logo">
+    <img src="assets/logo.svg" alt="Logo Maison Noor" width="40" height="56">
+    <span class="nav-wordmark">Maison Noor</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Le Seuil</a></li>
+    <li><a href="atelier.html">Atelier</a></li>
+    <li><a href="collection.html">Collection</a></li>
+    <li><a href="maison.html" class="active">La Maison</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="rendez-vous.html" class="btn btn-chrome btn-arrow">Rendez-vous</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div id="nav-backdrop" aria-hidden="true"></div>
+<div id="nav-drawer" role="dialog" aria-modal="true" aria-label="Menu">
+  <button id="drawer-close" class="btn btn-ghost">✕</button>
+  <ul class="drawer-links">
+    <li><a href="index.html">Le Seuil</a></li>
+    <li><a href="atelier.html">Atelier</a></li>
+    <li><a href="collection.html">Collection</a></li>
+    <li><a href="maison.html">La Maison</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="rendez-vous.html">Rendez-vous</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section id="maison-hero" class="section-pad" style="padding-top: 9rem;">
+  <p class="mono-label reveal" style="margin-bottom: 1rem;">Notre histoire</p>
+  <h1 class="heading-lg reveal reveal-delay-1" style="max-width: 20ch; margin-bottom: 2rem;">
+    Une maison née d'une obsession pour le détail.
+  </h1>
+  <p class="text-soft reveal reveal-delay-2" style="max-width: 54ch; font-size: 0.9375rem; line-height: 1.8;">
+    Maison Noor est née en 2024 de la conviction de Yasmine Noor qu'il manquait au marché de la lunetterie une maison qui conjugue véritablement l'artisanat ancestral et l'audace contemporaine. Pas une maison de plus. Une maison différente.
+  </p>
+</section>
+
+<!-- TIMELINE -->
+<section class="maison-timeline" aria-label="Chronologie de la Maison">
+  <div class="timeline-item reveal">
+    <p class="timeline-year">2019</p>
+    <div class="timeline-content">
+      <h2 class="heading-sm">L'idée germe</h2>
+      <p>Yasmine Noor, diplômée de l'ESMOD et ancienne directrice artistique chez un grand groupe de luxe parisien, commence à documenter les techniques ancestrales de travail de la corne de buffle au Vietnam et au Maroc.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal reveal-delay-1">
+    <p class="timeline-year">2021</p>
+    <div class="timeline-content">
+      <h2 class="heading-sm">La rencontre fondatrice</h2>
+      <p>Rencontre avec Karim Lazreg, maître-artisan lunetier de troisième génération. Ensemble, ils développent pendant deux ans un processus hybride : techniques artisanales transmises oralement, finitions de précision contemporaines.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal reveal-delay-2">
+    <p class="timeline-year">2023</p>
+    <div class="timeline-content">
+      <h2 class="heading-sm">L'atelier parisien</h2>
+      <p>Ouverture du premier atelier dans le 10e arrondissement de Paris. Les premières pièces de la Collection Proto sont offertes à vingt clients privés. Le bouche-à-oreille commence.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal reveal-delay-3">
+    <p class="timeline-year">2024</p>
+    <div class="timeline-content">
+      <h2 class="heading-sm">Le lancement officiel</h2>
+      <p>Lancement de Maison Noor avec la Collection 2024 et le Service Couture. Huit silhouettes, vingt-quatre exemplaires par pièce. Un service de visite à domicile unique en France dans le secteur de la lunetterie de luxe.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO SECTION -->
+<section style="padding: var(--section-pad-y) var(--section-pad-x); background: var(--noir-doux);">
+  <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+    <p class="mono-label dim reveal" style="margin-bottom: 2rem;">Notre philosophie</p>
+    <h2 class="heading-md reveal reveal-delay-1" style="margin-bottom: 2rem; line-height: 1.2;">
+      "Le luxe n'est pas dans l'ostentation.<br>Il est dans le soin infini apporté à ce que l'on ne voit pas."
+    </h2>
+    <p class="text-soft reveal reveal-delay-2" style="font-size: 0.875rem; line-height: 1.8; max-width: 52ch; margin: 0 auto;">
+      Chez Maison Noor, chaque assemblage de charnière, chaque courbe de branche, chaque nuance de la corne polie est le résultat d'une décision consciente. Nous refusons la production de masse, les délais industriels, les matières synthétiques.
+    </p>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-grid">
+  <div class="section-header reveal">
+    <div>
+      <p class="mono-label" style="margin-bottom: 0.5rem;">L'équipe</p>
+      <h2 class="heading-md">Les artisans<br>de votre regard.</h2>
+    </div>
+  </div>
+
+  <div class="team-members">
+    <article class="team-card reveal">
+      <div class="team-avatar">
+        <span class="avatar-initials">YN</span>
+      </div>
+      <div class="team-info">
+        <h3 class="team-name">Yasmine Noor</h3>
+        <p class="team-role">Fondatrice · Directrice artistique</p>
+        <p class="text-soft" style="font-size: 0.8125rem; margin-top: 0.75rem; line-height: 1.6;">
+          Ancienne DA d'une grande maison de luxe parisienne. Obsédée par la matière et la précision.
+        </p>
+      </div>
+    </article>
+
+    <article class="team-card reveal reveal-delay-1">
+      <div class="team-avatar">
+        <span class="avatar-initials">KL</span>
+      </div>
+      <div class="team-info">
+        <h3 class="team-name">Karim Lazreg</h3>
+        <p class="team-role">Maître-lunetier · Co-fondateur</p>
+        <p class="text-soft" style="font-size: 0.8125rem; margin-top: 0.75rem; line-height: 1.6;">
+          Troisième génération de lunetiers. Formé à Morez, perfectionné au Japon. Maître de la corne.
+        </p>
+      </div>
+    </article>
+
+    <article class="team-card reveal reveal-delay-2">
+      <div class="team-avatar">
+        <span class="avatar-initials">SB</span>
+      </div>
+      <div class="team-info">
+        <h3 class="team-name">Sofia Benmansour</h3>
+        <p class="team-role">Responsable atelier</p>
+        <p class="text-soft" style="font-size: 0.8125rem; margin-top: 0.75rem; line-height: 1.6;">
+          Douze ans d'expérience en lunetterie de luxe. Spécialiste des finitions à la main et du polissage.
+        </p>
+      </div>
+    </article>
+
+    <article class="team-card reveal reveal-delay-3">
+      <div class="team-avatar">
+        <span class="avatar-initials">TM</span>
+      </div>
+      <div class="team-info">
+        <h3 class="team-name">Thomas Mercier</h3>
+        <p class="team-role">Consultant opticien</p>
+        <p class="text-soft" style="font-size: 0.8125rem; margin-top: 0.75rem; line-height: 1.6;">
+          Optométriste diplômé. Assure l'adaptation de chaque monture aux prescriptions les plus exigeantes.
+        </p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ENGAGEMENTS -->
+<section style="padding: var(--section-pad-y) var(--section-pad-x);">
+  <div class="section-header reveal" style="margin-bottom: 3rem;">
+    <div>
+      <p class="mono-label" style="margin-bottom: 0.5rem;">Engagements</p>
+      <h2 class="heading-md">Ce en quoi<br>nous croyons.</h2>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;">
+    <div class="reveal" style="padding: 2rem; border: 1px solid rgba(255,255,255,0.06); border-radius: 2px;">
+      <p class="mono-label text-orange" style="margin-bottom: 1rem;">01 — Traçabilité</p>
+      <p class="text-soft" style="font-size: 0.875rem; line-height: 1.7;">Chaque monture est accompagnée d'un carnet de naissance documentant l'origine de chaque matière, les artisans impliqués et les étapes de fabrication.</p>
+    </div>
+    <div class="reveal reveal-delay-1" style="padding: 2rem; border: 1px solid rgba(255,255,255,0.06); border-radius: 2px;">
+      <p class="mono-label text-orange" style="margin-bottom: 1rem;">02 — Éthique</p>
+      <p class="text-soft" style="font-size: 0.875rem; line-height: 1.7;">Nos cornes de buffle proviennent exclusivement d'élevages certifiés. Aucun abattage pour la corne — elles sont récoltées naturellement après la vie de l'animal.</p>
+    </div>
+    <div class="reveal reveal-delay-2" style="padding: 2rem; border: 1px solid rgba(255,255,255,0.06); border-radius: 2px;">
+      <p class="mono-label text-orange" style="margin-bottom: 1rem;">03 — Durabilité</p>
+      <p class="text-soft" style="font-size: 0.875rem; line-height: 1.7;">Chaque monture Maison Noor est conçue pour durer des générations. Garantie à vie, service de réparation à Paris, remplacement gratuit des verres et branches.</p>
+    </div>
+    <div class="reveal reveal-delay-3" style="padding: 2rem; border: 1px solid rgba(255,255,255,0.06); border-radius: 2px;">
+      <p class="mono-label text-orange" style="margin-bottom: 1rem;">04 — Rareté</p>
+      <p class="text-soft" style="font-size: 0.875rem; line-height: 1.7;">Maximum 24 exemplaires par silhouette, par an. Nous préférons la rareté à la croissance. Nos clients ne croisent pas leur regard ailleurs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer" role="contentinfo">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <img src="assets/logo.svg" alt="Logo Maison Noor" width="32" height="45">
+        <span class="footer-brand-name">Maison Noor</span>
+      </div>
+      <p class="footer-tagline">Lunetterie de luxe française. Artisanat ancestral × esthétique rétro-futuriste. Paris, Est. 2024.</p>
+    </div>
+    <nav>
+      <p class="footer-nav-title">Navigation</p>
+      <ul class="footer-nav-links">
+        <li><a href="atelier.html">Atelier</a></li>
+        <li><a href="collection.html">Collection</a></li>
+        <li><a href="maison.html">La Maison</a></li>
+        <li><a href="rendez-vous.html">Rendez-vous</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <nav>
+      <p class="footer-nav-title">Légal</p>
+      <ul class="footer-nav-links">
+        <li><a href="legal.html">Mentions légales</a></li>
+        <li><a href="legal.html#rgpd">Données personnelles</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p class="footer-nav-title">Newsletter</p>
+      <p class="footer-tagline" style="margin-bottom: 1rem;">Avant-premières et invitations privées.</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="votre@email.com" class="newsletter-input" aria-label="Email">
+        <button type="submit" class="newsletter-submit">→</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2024 Maison Noor SAS. Tous droits réservés.</p>
+    <ul class="footer-legal">
+      <li><a href="legal.html">Mentions légales</a></li>
+      <li><a href="legal.html#rgpd">RGPD</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
