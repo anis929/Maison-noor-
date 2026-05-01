@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design tokens ──────────────────────────────────────────────────────── */
+:root {
+  --noir-profond:   #0A0A0A;
+  --noir-doux:      #141414;
+  --corne-fonce:    #2B1810;
+  --corne-medium:   #6B4423;
+  --corne-clair:    #A67C52;
+  --chrome:         #C8C8CC;
+  --chrome-clair:   #E8E8EC;
+  --orange-brule:   #D4541C;
+  --orange-lumiere: #FF7B3D;
+  --creme-os:       #E8DCC4;
+  --creme-pale:     #F5EFE0;
+}
+
+/* ── Base ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--noir-profond);
+  color: var(--creme-os);
+  font-family: var(--font-sans), sans-serif;
+  cursor: none; /* hidden on desktop — replaced by custom cursor */
+  overflow-x: hidden;
+}
+
+/* Restore cursor on touch devices */
+@media (pointer: coarse) {
+  body { cursor: auto; }
+}
+
+/* ── Selection ──────────────────────────────────────────────────────────── */
+::selection {
+  background: var(--orange-brule);
+  color: var(--creme-pale);
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--noir-profond); }
+::-webkit-scrollbar-thumb { background: var(--corne-medium); border-radius: 2px; }
+
+/* ── Typography ─────────────────────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display), serif;
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+/* ── Grain overlay (applied via ::after on .grain-overlay) ─────────────── */
+.grain-overlay {
+  position: relative;
+}
+.grain-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ── Chrome border utility ──────────────────────────────────────────────── */
+.border-chrome {
+  border: 1px solid var(--chrome);
+}
+
+/* ── Halo backgrounds ───────────────────────────────────────────────────── */
+.halo-orange {
+  background: radial-gradient(ellipse 70% 55% at 50% 50%, rgba(212,84,28,0.22) 0%, transparent 70%);
+}
+.halo-warm {
+  background: radial-gradient(ellipse 90% 65% at 50% 40%, rgba(212,84,28,0.12) 0%, transparent 70%);
+}
+
+/* ── Scroll-reveal base states (JS sets final state) ────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1),
+              transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* ── prefers-reduced-motion ──────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
+
+/* ── Form inputs ─────────────────────────────────────────────────────────── */
+.input-chrome {
+  background: transparent;
+  border: 1px solid rgba(200,200,204,0.25);
+  color: var(--creme-os);
+  padding: 1rem 1.25rem;
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input-chrome::placeholder { color: rgba(232,220,196,0.35); }
+.input-chrome:focus { border-color: var(--orange-brule); }
+
+textarea.input-chrome { resize: vertical; min-height: 120px; }
+
+/* ── Section spacing ─────────────────────────────────────────────────────── */
+.section-pad { padding: 6rem 5vw; }
+@media (min-width: 1280px) { .section-pad { padding: 9rem 8vw; } }
