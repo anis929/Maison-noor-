@@ -352,4 +352,225 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* ──────────────────────────────────────────────────────────
+     15. SCRAMBLE TEXT — révélation Matrix sur les .mono-label
+  ────────────────────────────────────────────────────────── */
+  const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ·—◆▸◇△○';
+
+  function scrambleText(el) {
+    const original = el.textContent.trim();
+    if (original.length > 40 || !original) return; // ignorer textes longs
+    const frames = original.length * 3;
+    let f = 0;
+    const tick = () => {
+      el.textContent = original.split('').map((ch, idx) => {
+        if (ch === ' ') return ' ';
+        if (idx < f / 3) return original[idx];
+        return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+      }).join('');
+      f++;
+      if (f <= frames) requestAnimationFrame(tick);
+      else el.textContent = original;
+    };
+    tick();
+  }
+
+  const scrambleObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        setTimeout(() => scrambleText(e.target), 150);
+        scrambleObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.9 });
+  document.querySelectorAll('.mono-label').forEach(el => scrambleObs.observe(el));
+
+  /* ──────────────────────────────────────────────────────────
+     16. SPLIT TEXT HERO — animation char par char (GSAP)
+  ────────────────────────────────────────────────────────── */
+  (function splitHeroTitle() {
+    const title = document.querySelector('.hero-title');
+    if (!title || typeof gsap === 'undefined') return;
+
+    // Séparer par ligne (on conserve les <br>)
+    const lines = title.innerHTML.split('<br>');
+    title.innerHTML = lines.map(line =>
+      line.trim().split('').map(ch => {
+        if (ch === ' ') return '<span style="display:inline-block;width:0.28em">&nbsp;</span>';
+        return `<span class="title-char" style="display:inline-block;will-change:transform">${ch}</span>`;
+      }).join('')
+    ).join('<br>');
+
+    // Supprimer l'animation d'opacité du hero-title (on gère ici)
+    title.style.opacity = '1';
+
+    gsap.fromTo('.title-char',
+      { opacity: 0, y: 55, rotateX: -90, transformOrigin: '50% 100%' },
+      { opacity: 1, y: 0, rotateX: 0, duration: 0.75, stagger: 0.026, delay: 0.4, ease: 'power4.out' }
+    );
+  })();
+
+  /* ──────────────────────────────────────────────────────────
+     17. PARALLAX HERO — logo flottant + couches de profondeur
+  ────────────────────────────────────────────────────────── */
+  (function initParallaxHero() {
+    const hero = document.getElementById('hero');
+    if (!hero || isMobile() || typeof gsap === 'undefined') return;
+
+    const logoLayer  = hero.querySelector('.hero-logo-layer');
+    const heroBg     = hero.querySelector('.hero-bg');
+    const heroLabel  = hero.querySelector('.hero-label');
+
+    hero.addEventListener('mousemove', e => {
+      const dx = (e.clientX - window.innerWidth  / 2) / window.innerWidth;
+      const dy = (e.clientY - window.innerHeight / 2) / window.innerHeight;
+
+      if (logoLayer) gsap.to(logoLayer, { x: dx * 48, y: dy * 32, duration: 2.0, ease: 'power2.out' });
+      if (heroBg)    gsap.to(heroBg,    { x: dx * 12, y: dy *  8, duration: 2.4, ease: 'power2.out' });
+      if (heroLabel) gsap.to(heroLabel, { x: dx * 16, y: dy * 10, duration: 1.6, ease: 'power2.out' });
+    });
+
+    hero.addEventListener('mouseleave', () => {
+      [logoLayer, heroBg, heroLabel].forEach(el => {
+        if (el) gsap.to(el, { x: 0, y: 0, duration: 1.8, ease: 'power2.out' });
+      });
+    });
+  })();
+
+  /* ──────────────────────────────────────────────────────────
+     18. BOUTONS MAGNÉTIQUES — élasticité GSAP
+  ────────────────────────────────────────────────────────── */
+  if (!isMobile() && typeof gsap !== 'undefined') {
+    document.querySelectorAll('.btn-filled, .btn-chrome, .btn-orange').forEach(btn => {
+      btn.addEventListener('mousemove', e => {
+        const r  = btn.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width  / 2);
+        const dy = e.clientY - (r.top  + r.height / 2);
+        gsap.to(btn, { x: dx * 0.22, y: dy * 0.18, duration: 0.3, ease: 'power2.out', overwrite: true });
+      });
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.45)', overwrite: true });
+      });
+    });
+  }
+
+  /* ──────────────────────────────────────────────────────────
+     19. SONS DE MATIÈRE — Web Audio API (aucun fichier audio)
+         Son activé/désactivé via bouton #sound-toggle
+  ────────────────────────────────────────────────────────── */
+  (function initMaterialSound() {
+    let audioCtx = null;
+    let soundEnabled = false;
+    const toggleBtn = document.getElementById('sound-toggle');
+    if (!toggleBtn) return;
+
+    function getCtx() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      return audioCtx;
+    }
+
+    // Texture corne : bruit blanc filtré basse fréquence
+    function playHornTexture(vol = 0.06) {
+      try {
+        const ctx = getCtx();
+        const len = ctx.sampleRate * 0.12;
+        const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+        const d   = buf.getChannelData(0);
+        for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 1.5);
+
+        const src = ctx.createBufferSource();
+        src.buffer = buf;
+
+        const filt = ctx.createBiquadFilter();
+        filt.type = 'lowpass';
+        filt.frequency.value = 1200;
+        filt.Q.value = 0.8;
+
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(vol, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+
+        src.connect(filt); filt.connect(gain); gain.connect(ctx.destination);
+        src.start();
+      } catch (_) {}
+    }
+
+    // Clic nav : note douce
+    function playChime(freq = 440, vol = 0.04) {
+      try {
+        const ctx = getCtx();
+        const osc  = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(vol, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.55);
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.start(); osc.stop(ctx.currentTime + 0.55);
+      } catch (_) {}
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      toggleBtn.textContent = soundEnabled ? '♪ Son actif' : '♪ Son off';
+      toggleBtn.style.color = soundEnabled ? 'var(--chrome)' : 'rgba(234,224,210,0.3)';
+      if (soundEnabled) playChime(528, 0.06);
+    });
+
+    // Attacher les sons aux éléments interactifs
+    document.querySelectorAll('.product-card, .path-panel').forEach(el => {
+      el.addEventListener('mouseenter', () => { if (soundEnabled) playHornTexture(); });
+    });
+
+    document.querySelectorAll('.nav-links a, .btn').forEach(el => {
+      el.addEventListener('click', () => { if (soundEnabled) playChime(396 + Math.random() * 200, 0.03); });
+    });
+  })();
+
+  /* ──────────────────────────────────────────────────────────
+     20. COMPTEUR DE RARETÉ — stock en temps réel (simulé)
+  ────────────────────────────────────────────────────────── */
+  document.querySelectorAll('[data-stock]').forEach(el => {
+    let stock = parseInt(el.dataset.stock, 10) || 3;
+    const render = () => {
+      el.textContent = stock <= 2 ? `Derniers ${stock} ex.` : `${stock} ex. disponibles`;
+      el.style.color  = stock <= 2 ? 'var(--orange-brule)' : 'var(--chrome)';
+    };
+    render();
+
+    // Décrémentation aléatoire pour simuler la demande
+    const decrement = () => {
+      if (stock > 1 && Math.random() < 0.35) {
+        stock--;
+        render();
+        el.animate([{ opacity: 1 }, { opacity: 0.2 }, { opacity: 1 }], { duration: 600 });
+      }
+      const next = 60000 + Math.random() * 180000; // 1–4 min
+      setTimeout(decrement, next);
+    };
+    setTimeout(decrement, 20000 + Math.random() * 60000);
+  });
+
+  /* ──────────────────────────────────────────────────────────
+     21. SCROLL HORIZONTAL ÉDITORIAL (drag-to-scroll)
+  ────────────────────────────────────────────────────────── */
+  const editorialTrack = document.getElementById('editorial-track');
+  if (editorialTrack) {
+    let isDown = false, startX, scrollLeft;
+    editorialTrack.addEventListener('mousedown', e => {
+      isDown = true; editorialTrack.style.cursor = 'grabbing';
+      startX = e.pageX - editorialTrack.offsetLeft;
+      scrollLeft = editorialTrack.scrollLeft;
+    });
+    editorialTrack.addEventListener('mouseleave', () => { isDown = false; editorialTrack.style.cursor = 'grab'; });
+    editorialTrack.addEventListener('mouseup',    () => { isDown = false; editorialTrack.style.cursor = 'grab'; });
+    editorialTrack.addEventListener('mousemove',  e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - editorialTrack.offsetLeft;
+      editorialTrack.scrollLeft = scrollLeft - (x - startX) * 1.4;
+    });
+  }
+
 });
+

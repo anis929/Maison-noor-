@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conseiller Morphologique — Trouvez votre monture | Maison Noor</title>
+  <meta name="description" content="Notre algorithme analyse votre morphologie et vous recommande les silhouettes Maison Noor faites pour votre regard.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+<div id="page-transition"></div>
+<div id="cursor" aria-hidden="true"></div>
+
+<nav id="nav" aria-label="Navigation principale">
+  <a href="index.html" class="nav-logo">
+    <img src="assets/logo.svg" alt="Logo Maison Noor" width="40" height="56">
+    <span class="nav-wordmark">Maison Noor</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Le Seuil</a></li>
+    <li><a href="atelier.html">Atelier</a></li>
+    <li><a href="collection.html">Collection</a></li>
+    <li><a href="maison.html">La Maison</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="rendez-vous.html" class="btn btn-chrome btn-arrow">Rendez-vous</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div id="nav-backdrop" aria-hidden="true"></div>
+<div id="nav-drawer" role="dialog" aria-modal="true" aria-label="Menu">
+  <button id="drawer-close" class="btn btn-ghost">✕</button>
+  <ul class="drawer-links">
+    <li><a href="index.html">Le Seuil</a></li>
+    <li><a href="atelier.html">Atelier</a></li>
+    <li><a href="collection.html">Collection</a></li>
+    <li><a href="maison.html">La Maison</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="rendez-vous.html">Rendez-vous</a></li>
+  </ul>
+</div>
+
+<!-- ============================================================
+     CONSEILLER MORPHOLOGIQUE
+============================================================ -->
+<main style="min-height: 100vh; padding: 8rem var(--section-pad-x) var(--section-pad-y); max-width: 880px; margin: 0 auto;">
+
+  <!-- En-tête -->
+  <p class="mono-label reveal" style="margin-bottom: 1rem;">Expérience · Conseiller Morphologique</p>
+  <h1 class="heading-md reveal reveal-delay-1" style="margin-bottom: 1rem; max-width: 22ch;">
+    Quelle monture vous ressemble ?
+  </h1>
+  <p class="text-soft reveal reveal-delay-2" style="max-width: 52ch; margin-bottom: 3rem;">
+    En cinq questions, notre algorithme croise votre morphologie, votre style et vos préférences pour révéler les silhouettes faites pour vous.
+  </p>
+
+  <!-- Barre de progression -->
+  <div class="progress-bar" id="advisor-progress" role="progressbar" aria-label="Avancement" style="margin-bottom: 3rem;">
+    <div class="progress-step active" data-ap="0"></div>
+    <div class="progress-step" data-ap="1"></div>
+    <div class="progress-step" data-ap="2"></div>
+    <div class="progress-step" data-ap="3"></div>
+    <div class="progress-step" data-ap="4"></div>
+  </div>
+
+  <!-- Étape 1 — Morphologie -->
+  <div class="advisor-step active" data-advisor-step="0">
+    <p class="mono-label dim" style="margin-bottom: 0.5rem;">Question 1 / 5</p>
+    <h2 class="heading-sm" style="margin-bottom: 0.5rem;">Quelle est la forme de votre visage ?</h2>
+    <p class="text-soft" style="margin-bottom: 2rem; font-size: 0.9rem;">Si vous n'êtes pas certain(e), penchez la tête en avant devant un miroir et tracez mentalement le contour.</p>
+
+    <div class="face-grid" role="group" aria-label="Forme du visage">
+
+      <div class="face-option" data-key="face" data-val="oval" role="radio" tabindex="0">
+        <svg class="face-shape-svg" viewBox="0 0 60 80" width="50" height="66" fill="none">
+          <ellipse cx="30" cy="40" rx="22" ry="32" stroke="#C9A56A" stroke-width="1.5"/>
+        </svg>
+        <p class="face-shape-label">Ovale</p>
+        <p class="face-shape-tip">Visage équilibré, légèrement plus large aux pommettes</p>
+      </div>
+
+      <div class="face-option" data-key="face" data-val="round" role="radio" tabindex="0">
+        <svg class="face-shape-svg" viewBox="0 0 60 80" width="50" height="66" fill="none">
+          <circle cx="30" cy="40" r="24" stroke="#C9A56A" stroke-width="1.5"/>
+        </svg>
+        <p class="face-shape-label">Rond</p>
+        <p class="face-shape-tip">Largeur et hauteur similaires, joues douces</p>
+      </div>
+
+      <div class="face-option" data-key="face" data-val="rect" role="radio" tabindex="0">
+        <svg class="face-shape-svg" viewBox="0 0 60 80" width="50" height="66" fill="none">
+          <rect x="10" y="10" width="40" height="60" rx="6" stroke="#C9A56A" stroke-width="1.5"/>
+        </svg>
+        <p class="face-shape-label">Rectangle</p>
+        <p class="face-shape-tip">Mâchoire carrée, front large, visage allongé</p>
+      </div>
+
+      <div class="face-option" data-key="face" data-val="diamond" role="radio" tabindex="0">
+        <svg class="face-shape-svg" viewBox="0 0 60 80" width="50" height="66" fill="none">
+          <polygon points="30,8 52,38 30,72 8,38" stroke="#C9A56A" stroke-width="1.5"/>
+        </svg>
+        <p class="face-shape-label">Diamant</p>
+        <p class="face-shape-tip">Pommettes larges, front et menton étroits</p>
+      </div>
+
+      <div class="face-option" data-key="face" data-val="heart" role="radio" tabindex="0">
+        <svg class="face-shape-svg" viewBox="0 0 60 80" width="50" height="66" fill="none">
+          <path d="M30,68 C10,52 6,14 30,24 C54,14 50,52 30,68Z" stroke="#C9A56A" stroke-width="1.5"/>
+        </svg>
+        <p class="face-shape-label">Cœur</p>
+        <p class="face-shape-tip">Front large, pommettes marquées, menton fin</p>
+      </div>
+
+    </div>
+    <div class="form-nav"><button type="button" class="btn btn-filled btn-arrow" data-advisor-next>Continuer</button></div>
+  </div>
+
+  <!-- Étape 2 — Style de vie -->
+  <div class="advisor-step" data-advisor-step="1">
+    <p class="mono-label dim" style="margin-bottom: 0.5rem;">Question 2 / 5</p>
+    <h2 class="heading-sm" style="margin-bottom: 0.5rem;">Comment décririez-vous votre style ?</h2>
+    <p class="text-soft" style="margin-bottom: 2rem; font-size: 0.9rem;">Pas votre tenue du quotidien — votre façon d'habiter votre regard.</p>
+
+    <div class="advisor-choice-grid" role="group">
+      <div class="advisor-choice" data-key="style" data-val="classic">
+        <p class="choice-title">Classique affiné</p>
+        <p class="choice-desc">Sobre, précis, intemporel. Vous misez sur la qualité des détails invisibles.</p>
+      </div>
+      <div class="advisor-choice" data-key="style" data-val="bold">
+        <p class="choice-title">Audacieux assumé</p>
+        <p class="choice-desc">Votre monture est une déclaration. Vous aimez être reconnu(e) avant d'ouvrir la bouche.</p>
+      </div>
+      <div class="advisor-choice" data-key="style" data-val="artsy">
+        <p class="choice-title">Artistique singulier</p>
+        <p class="choice-desc">Vous collectionnez les objets qui ont une âme. L'ordinaire vous ennuie profondément.</p>
+      </div>
+      <div class="advisor-choice" data-key="style" data-val="minimal">
+        <p class="choice-title">Épuré futuriste</p>
+        <p class="choice-desc">Moins mais mieux. Chaque ligne a une raison d'être. La précision est votre esthétique.</p>
+      </div>
+    </div>
+    <div class="form-nav">
+      <button type="button" class="btn btn-ghost" data-advisor-prev>← Retour</button>
+      <button type="button" class="btn btn-filled btn-arrow" data-advisor-next>Continuer</button>
+    </div>
+  </div>
+
+  <!-- Étape 3 — Usage -->
+  <div class="advisor-step" data-advisor-step="2">
+    <p class="mono-label dim" style="margin-bottom: 0.5rem;">Question 3 / 5</p>
+    <h2 class="heading-sm" style="margin-bottom: 0.5rem;">Dans quel univers portez-vous vos lunettes ?</h2>
+    <p class="text-soft" style="margin-bottom: 2rem; font-size: 0.9rem;">Plusieurs contextes sont valides — choisissez celui qui domine.</p>
+
+    <div class="advisor-choice-grid" role="group">
+      <div class="advisor-choice" data-key="usage" data-val="daily">
+        <p class="choice-title">Quotidien intense</p>
+        <p class="choice-desc">Du matin au soir, elles ne vous quittent pas. Confort et légèreté sont essentiels.</p>
+      </div>
+      <div class="advisor-choice" data-key="usage" data-val="pro">
+        <p class="choice-title">Professionnel exigeant</p>
+        <p class="choice-desc">Salle de réunion, plateaux, représentation. Votre monture parle à votre place.</p>
+      </div>
+      <div class="advisor-choice" data-key="usage" data-val="evening">
+        <p class="choice-title">Soirées et événements</p>
+        <p class="choice-desc">Vernissages, dîners, premières. Vous voulez que l'on s'en souvienne.</p>
+      </div>
+    </div>
+    <div class="form-nav">
+      <button type="button" class="btn btn-ghost" data-advisor-prev>← Retour</button>
+      <button type="button" class="btn btn-filled btn-arrow" data-advisor-next>Continuer</button>
+    </div>
+  </div>
+
+  <!-- Étape 4 — Priorité -->
+  <div class="advisor-step" data-advisor-step="3">
+    <p class="mono-label dim" style="margin-bottom: 0.5rem;">Question 4 / 5</p>
+    <h2 class="heading-sm" style="margin-bottom: 0.5rem;">Votre priorité absolue ?</h2>
+    <p class="text-soft" style="margin-bottom: 2rem; font-size: 0.9rem;">Si vous ne deviez garder qu'un critère.</p>
+
+    <div class="advisor-choice-grid" role="group">
+      <div class="advisor-choice" data-key="priority" data-val="comfort">
+        <p class="choice-title">Le confort d'abord</p>
+        <p class="choice-desc">Une monture qu'on oublie sur le nez. Légère, équilibrée, sans pression.</p>
+      </div>
+      <div class="advisor-choice" data-key="priority" data-val="impact">
+        <p class="choice-title">L'impact visuel</p>
+        <p class="choice-desc">Que votre regard soit le premier détail que l'on remarque. La monture comme signature.</p>
+      </div>
+      <div class="advisor-choice" data-key="priority" data-val="rarity">
+        <p class="choice-title">La rareté absolue</p>
+        <p class="choice-desc">Posséder ce que personne d'autre n'a. Un objet de collection numéroté et traçable.</p>
+      </div>
+    </div>
+    <div class="form-nav">
+      <button type="button" class="btn btn-ghost" data-advisor-prev>← Retour</button>
+      <button type="button" class="btn btn-filled btn-arrow" data-advisor-next>Continuer</button>
+    </div>
+  </div>
+
+  <!-- Étape 5 — Matière -->
+  <div class="advisor-step" data-advisor-step="4">
+    <p class="mono-label dim" style="margin-bottom: 0.5rem;">Question 5 / 5</p>
+    <h2 class="heading-sm" style="margin-bottom: 0.5rem;">Quelle matière vous attire ?</h2>
+    <p class="text-soft" style="margin-bottom: 2rem; font-size: 0.9rem;">Fermez les yeux. Vous tenez votre prochaine monture. Que sentez-vous sous vos doigts ?</p>
+
+    <div class="advisor-choice-grid" role="group">
+      <div class="advisor-choice" data-key="material" data-val="horn">
+        <p class="choice-title">Corne de buffle</p>
+        <p class="choice-desc">Chaude, vivante, unique. Chaque veine raconte une histoire de la forêt et de l'artisan.</p>
+      </div>
+      <div class="advisor-choice" data-key="material" data-val="titanium">
+        <p class="choice-title">Titane japonais</p>
+        <p class="choice-desc">Froid, précis, presque immatériel. La force absolue dans l'épaisseur d'un souffle.</p>
+      </div>
+      <div class="advisor-choice" data-key="material" data-val="any">
+        <p class="choice-title">La meilleure des deux</p>
+        <p class="choice-desc">Vous voulez que la recommandation choisisse pour vous. Vous faites confiance au résultat.</p>
+      </div>
+    </div>
+    <div class="form-nav">
+      <button type="button" class="btn btn-ghost" data-advisor-prev>← Retour</button>
+      <button type="button" class="btn btn-filled btn-arrow" id="advisor-reveal">Révéler mes montures →</button>
+    </div>
+  </div>
+
+  <!-- RÉSULTATS (masqués jusqu'au calcul) -->
+  <div id="advisor-results" style="display:none;">
+    <div style="text-align:center; padding: 2rem 0 3rem;">
+      <div style="width:64px;height:64px;border-radius:50%;background:rgba(124,31,59,0.15);border:1px solid var(--corne-clair);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:1.25rem;color:var(--chrome);">◎</div>
+      <p class="mono-label dim" style="margin-bottom:0.75rem;">Votre sélection personnalisée</p>
+      <h2 class="heading-md" style="margin-bottom:1rem;" id="results-title">Nos recommandations</h2>
+      <p class="text-soft" style="max-width:46ch;margin:0 auto;" id="results-subtitle">Basées sur votre profil morphologique et vos préférences.</p>
+    </div>
+    <div class="result-cards" id="result-cards-container"></div>
+    <div style="text-align:center;margin-top:3rem;">
+      <button type="button" class="btn btn-ghost" id="advisor-restart">← Recommencer</button>
+      <a href="rendez-vous.html" class="btn btn-filled btn-arrow" style="margin-left:1rem;">Prendre rendez-vous</a>
+    </div>
+  </div>
+
+</main>
+
+<footer id="footer" role="contentinfo">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <img src="assets/logo.svg" alt="Logo Maison Noor" width="32" height="45">
+        <span class="footer-brand-name">Maison Noor</span>
+      </div>
+      <p class="footer-tagline">Lunetterie de luxe française. Artisanat ancestral × esthétique rétro-futuriste. Paris, Est. 2024.</p>
+    </div>
+    <nav>
+      <p class="footer-nav-title">Navigation</p>
+      <ul class="footer-nav-links">
+        <li><a href="atelier.html">Atelier</a></li>
+        <li><a href="collection.html">Collection</a></li>
+        <li><a href="maison.html">La Maison</a></li>
+        <li><a href="rendez-vous.html">Rendez-vous</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <nav><p class="footer-nav-title">Légal</p>
+      <ul class="footer-nav-links">
+        <li><a href="legal.html">Mentions légales</a></li>
+        <li><a href="legal.html#rgpd">Données personnelles</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p class="footer-nav-title">Newsletter</p>
+      <form class="newsletter-form"><input type="email" placeholder="votre@email.com" class="newsletter-input" aria-label="Email"><button type="submit" class="newsletter-submit">→</button></form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2024 Maison Noor SAS. Tous droits réservés.</p>
+    <ul class="footer-legal"><li><a href="legal.html">Mentions légales</a></li><li><a href="legal.html#rgpd">RGPD</a></li></ul>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+/* ============================================================
+   LOGIQUE CONSEILLER MORPHOLOGIQUE
+   ============================================================ */
+(function() {
+  // Base de données produits avec scores par critère
+  const PRODUCTS = [
+    { id: 'noor-i',   name: 'Noor I',    meta: 'Ovale · Corne · Mixte',    price: '2 400 €', href: 'collection/noor-i.html',
+      scores: { face: { oval:12, round:6, rect:4, diamond:8, heart:10 }, style: { classic:10, bold:6, artsy:8, minimal:6 }, usage: { daily:10, pro:8, evening:7 }, priority: { comfort:12, impact:6, rarity:8 }, material: { horn:14, titanium:2, any:8 } }
+    },
+    { id: 'noor-ii',  name: 'Noor II',   meta: 'Rectangulaire · Titane · Homme', price: '2 800 €', href: 'collection/noor-ii.html',
+      scores: { face: { oval:6, round:14, rect:4, diamond:8, heart:6 }, style: { classic:12, bold:6, artsy:4, minimal:14 }, usage: { daily:8, pro:14, evening:6 }, priority: { comfort:10, impact:8, rarity:8 }, material: { horn:2, titanium:14, any:8 } }
+    },
+    { id: 'noor-iii', name: 'Noor III',  meta: 'Hexagonale · Titane · Mixte', price: '3 600 €', href: 'collection/noor-iii.html',
+      scores: { face: { oval:8, round:10, rect:8, diamond:6, heart:8 }, style: { classic:6, bold:10, artsy:12, minimal:10 }, usage: { daily:6, pro:10, evening:12 }, priority: { comfort:6, impact:14, rarity:10 }, material: { horn:4, titanium:14, any:9 } }
+    },
+    { id: 'serie-15', name: 'Série 15',  meta: 'Papillon · Corne · Femme', price: '3 200 €', href: 'collection/serie-15.html',
+      scores: { face: { oval:10, round:4, rect:8, diamond:6, heart:12 }, style: { classic:6, bold:14, artsy:10, minimal:4 }, usage: { daily:6, pro:8, evening:16 }, priority: { comfort:4, impact:16, rarity:10 }, material: { horn:14, titanium:2, any:8 } }
+    },
+    { id: 'projet-06',name: 'Projet 06', meta: 'Ronde · Titane · Homme', price: '4 100 €', href: 'collection/projet-06.html',
+      scores: { face: { oval:6, round:4, rect:12, diamond:10, heart:8 }, style: { classic:6, bold:8, artsy:14, minimal:12 }, usage: { daily:10, pro:10, evening:10 }, priority: { comfort:8, impact:10, rarity:12 }, material: { horn:4, titanium:14, any:9 } }
+    },
+    { id: 'corne-i',  name: 'Corne I',   meta: 'Rectangulaire · Corne · Mixte', price: '2 600 €', href: 'collection/corne-i.html',
+      scores: { face: { oval:6, round:12, rect:4, diamond:8, heart:8 }, style: { classic:12, bold:8, artsy:6, minimal:8 }, usage: { daily:12, pro:12, evening:6 }, priority: { comfort:14, impact:6, rarity:8 }, material: { horn:14, titanium:2, any:8 } }
+    },
+    { id: 'corne-ii', name: 'Corne II',  meta: 'Ovale · Corne · Femme', price: '2 900 €', href: 'collection/corne-ii.html',
+      scores: { face: { oval:14, round:6, rect:6, diamond:10, heart:8 }, style: { classic:10, bold:8, artsy:10, minimal:6 }, usage: { daily:10, pro:8, evening:10 }, priority: { comfort:12, impact:8, rarity:8 }, material: { horn:14, titanium:2, any:8 } }
+    },
+    { id: 'noor-iv',  name: 'Noor IV',   meta: 'Hexagonale · Titane Japonais · Mixte', price: '4 800 €', href: 'collection/noor-iv.html',
+      scores: { face: { oval:8, round:10, rect:8, diamond:8, heart:6 }, style: { classic:6, bold:10, artsy:10, minimal:14 }, usage: { daily:6, pro:12, evening:12 }, priority: { comfort:6, impact:12, rarity:18 }, material: { horn:2, titanium:14, any:8 } }
+    },
+  ];
+
+  const answers = {};
+  let currentAdvisorStep = 0;
+  const steps = document.querySelectorAll('.advisor-step');
+  const progressSteps = document.querySelectorAll('[data-ap]');
+  const resultsDiv = document.getElementById('advisor-results');
+  const formEl = document.querySelector('main');
+
+  // Options cliquables
+  document.querySelectorAll('.face-option, .advisor-choice').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const key = opt.dataset.key;
+      document.querySelectorAll(`[data-key="${key}"]`).forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      answers[key] = opt.dataset.val;
+    });
+
+    opt.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); opt.click(); }
+    });
+  });
+
+  function goAdvisorStep(idx) {
+    steps.forEach((s, i) => s.classList.toggle('active', i === idx));
+    progressSteps.forEach((s, i) => {
+      s.classList.toggle('done', i < idx);
+      s.classList.toggle('active', i === idx);
+    });
+    currentAdvisorStep = idx;
+    window.scrollTo({ top: 100, behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('[data-advisor-next]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (currentAdvisorStep < steps.length - 1) goAdvisorStep(currentAdvisorStep + 1);
+    });
+  });
+  document.querySelectorAll('[data-advisor-prev]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (currentAdvisorStep > 0) goAdvisorStep(currentAdvisorStep - 1);
+    });
+  });
+
+  // Calcul et affichage résultats
+  document.getElementById('advisor-reveal')?.addEventListener('click', () => {
+    const scored = PRODUCTS.map(p => {
+      let total = 0;
+      const keys = ['face','style','usage','priority','material'];
+      keys.forEach(k => {
+        const ans = answers[k];
+        if (ans && p.scores[k] && p.scores[k][ans] !== undefined) {
+          total += p.scores[k][ans];
+        }
+      });
+      const maxPossible = keys.reduce((acc, k) => acc + Math.max(...Object.values(p.scores[k])), 0);
+      return { ...p, total, pct: Math.round((total / maxPossible) * 100) };
+    });
+
+    scored.sort((a, b) => b.total - a.total);
+    const top3 = scored.slice(0, 3);
+
+    const container = document.getElementById('result-cards-container');
+    container.innerHTML = '';
+
+    top3.forEach((p, idx) => {
+      const card = document.createElement('a');
+      card.href = p.href;
+      card.className = 'result-card reveal';
+      card.innerHTML = `
+        <p class="result-match">${idx === 0 ? '✦ Meilleur match' : `Recommandation ${idx + 1}`} — ${p.pct}%</p>
+        <div class="match-bar"><div class="match-fill" style="width:0%" data-target="${p.pct}%"></div></div>
+        <div class="result-img"><div style="width:80px;height:50px;background:linear-gradient(135deg,var(--corne-medium),var(--corne-clair));border-radius:60% 60% 50% 50%/40% 40% 60% 60%;opacity:0.7;"></div></div>
+        <div class="result-info">
+          <p class="result-name">${p.name}</p>
+          <p class="result-meta">${p.meta}</p>
+          <p style="font-family:var(--font-mono);font-size:0.875rem;color:var(--chrome);margin-top:0.5rem;">${p.price}</p>
+        </div>`;
+      container.appendChild(card);
+    });
+
+    // Masquer formulaire, afficher résultats
+    steps.forEach(s => { s.classList.remove('active'); s.style.display = 'none'; });
+    document.getElementById('advisor-progress').style.display = 'none';
+    resultsDiv.style.display = 'block';
+
+    // Animer les barres de score avec un léger délai
+    setTimeout(() => {
+      document.querySelectorAll('.match-fill').forEach(fill => {
+        fill.style.width = fill.dataset.target;
+      });
+      // Scroll reveal des cards
+      document.querySelectorAll('.result-card').forEach(c => setTimeout(() => c.classList.add('visible'), 200));
+    }, 100);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Recommencer
+  document.getElementById('advisor-restart')?.addEventListener('click', () => {
+    Object.keys(answers).forEach(k => delete answers[k]);
+    document.querySelectorAll('.face-option, .advisor-choice').forEach(o => o.classList.remove('selected'));
+    resultsDiv.style.display = 'none';
+    document.getElementById('advisor-progress').style.display = 'flex';
+    steps.forEach(s => { s.style.display = ''; });
+    goAdvisorStep(0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+})();
+</script>
+</body>
+</html>

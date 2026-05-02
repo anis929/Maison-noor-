@@ -66,6 +66,11 @@
   <div class="hero-placeholder"></div>
   <div class="hero-bg"></div>
 
+  <!-- Logo flottant — parallaxe souris -->
+  <div class="hero-logo-layer" aria-hidden="true">
+    <img src="assets/logo.svg" alt="" width="260">
+  </div>
+
   <div class="hero-content">
     <p class="mono-label hero-label">Heritage Future — Paris, Est. 2024</p>
     <h1 class="heading-xl hero-title">
@@ -209,6 +214,97 @@
     </a>
   </div>
 </section>
+
+<!-- ============================================================
+     ÉDITORIAL — Scroll horizontal drag-to-read
+============================================================ -->
+<section id="editorial">
+  <div style="padding: 0 var(--section-pad-x); margin-bottom: 2.5rem; display:flex; align-items:flex-end; justify-content:space-between;">
+    <div>
+      <p class="mono-label reveal" style="margin-bottom:0.5rem;">Éditorial</p>
+      <h2 class="heading-sm reveal reveal-delay-1">Le regard Maison Noor</h2>
+    </div>
+    <p class="mono-label dim reveal reveal-delay-2" style="font-size:0.5rem;">← Glissez →</p>
+  </div>
+
+  <div id="editorial-track" role="list" aria-label="Galerie éditoriale">
+
+    <div class="editorial-card" role="listitem" style="background: linear-gradient(160deg, #3D0F1E, #7C1F3B);">
+      <div class="editorial-card-bg" style="background:linear-gradient(180deg, transparent 40%, rgba(12,6,8,0.9) 100%); position:absolute;inset:0;"></div>
+      <div class="editorial-card-content">
+        <p class="editorial-card-quote">"La matière se souvient de chaque lumière qu'elle a traversée."</p>
+        <p class="editorial-card-attr">Corne de buffle · Viêt Nam</p>
+      </div>
+    </div>
+
+    <div class="editorial-card" role="listitem" style="background: linear-gradient(160deg, #160C11, #3D0F1E);">
+      <div class="editorial-card-bg" style="background:linear-gradient(180deg, transparent 40%, rgba(12,6,8,0.9) 100%); position:absolute;inset:0;"></div>
+      <div class="editorial-card-content">
+        <p class="editorial-card-quote">"Chaque monture naît deux fois — dans l'atelier, et sur le visage qui la choisit."</p>
+        <p class="editorial-card-attr">Karim Lazreg · Maître-lunetier</p>
+      </div>
+    </div>
+
+    <div class="editorial-card" role="listitem" style="background: linear-gradient(160deg, #7C1F3B, #B54870);">
+      <div class="editorial-card-bg" style="background:linear-gradient(180deg, transparent 40%, rgba(12,6,8,0.9) 100%); position:absolute;inset:0;"></div>
+      <div class="editorial-card-content">
+        <p class="editorial-card-quote">"Nous refusons la production de masse. Vingt-quatre exemplaires, vingt-quatre regards singuliers."</p>
+        <p class="editorial-card-attr">Manifeste Maison Noor · 2024</p>
+      </div>
+    </div>
+
+    <div class="editorial-card" role="listitem" style="background: linear-gradient(160deg, #2A1208, #7C1F3B);">
+      <div class="editorial-card-bg" style="background:linear-gradient(180deg, transparent 40%, rgba(12,6,8,0.9) 100%); position:absolute;inset:0;"></div>
+      <div class="editorial-card-content">
+        <p class="editorial-card-quote">"Le titane japonais porte en lui la précision d'une culture qui a fait de l'excellence une philosophie."</p>
+        <p class="editorial-card-attr">Noor III · Hexagonale Titane</p>
+      </div>
+    </div>
+
+    <div class="editorial-card" role="listitem" style="background: linear-gradient(160deg, #0C0608, #3D0F1E);">
+      <div class="editorial-card-bg" style="background:linear-gradient(180deg, transparent 40%, rgba(12,6,8,0.9) 100%); position:absolute;inset:0;"></div>
+      <div class="editorial-card-content">
+        <p class="editorial-card-quote">"Yasmine Noor n'a pas fondé une marque. Elle a ouvert un rituel."</p>
+        <p class="editorial-card-attr">Portrait · Vogue France · 2024</p>
+      </div>
+    </div>
+
+    <div class="editorial-card" role="listitem" style="background: linear-gradient(160deg, #3D0F1E, #0C0608);">
+      <div class="editorial-card-bg" style="background:linear-gradient(180deg, transparent 40%, rgba(12,6,8,0.9) 100%); position:absolute;inset:0;"></div>
+      <div class="editorial-card-content">
+        <p class="editorial-card-quote">"Il y a dans cette corne quelque chose d'irréductible. Un vivant qui refuse de mourir tout à fait."</p>
+        <p class="editorial-card-attr">Série 15 · Papillon Corne</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     EXPÉRIENCES — Liens vers Conseiller + Configurateur
+============================================================ -->
+<section aria-label="Expériences digitales Maison Noor">
+  <div class="experience-grid">
+
+    <a href="conseiller.html" class="experience-card reveal">
+      <div class="experience-icon" aria-hidden="true">◎</div>
+      <h2 class="experience-title">Conseiller Morphologique</h2>
+      <p class="experience-desc">En cinq questions, notre algorithme analyse votre morphologie et vous recommande les silhouettes faites pour votre regard.</p>
+      <span class="experience-arrow">Trouver ma monture →</span>
+    </a>
+
+    <a href="configurateur.html" class="experience-card reveal reveal-delay-1">
+      <div class="experience-icon" aria-hidden="true">◈</div>
+      <h2 class="experience-title">Configurateur Live</h2>
+      <p class="experience-desc">Personnalisez votre monture en temps réel : forme, matière, coloris, taille, gravure. Visualisez avant de commander.</p>
+      <span class="experience-arrow">Composer ma monture →</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- Son de matière (bouton flottant discret) -->
+<button id="sound-toggle" aria-label="Activer les sons de matière">♪ Son off</button>
 
 <!-- ============================================================
      FOOTER

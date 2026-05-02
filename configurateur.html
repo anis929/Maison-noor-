@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurateur de Monture — Créez la vôtre | Maison Noor</title>
+  <meta name="description" content="Configurez votre monture Maison Noor en temps réel : silhouette, matière, taille, gravure personnalisée. Chaque détail, à votre image.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    /* ---- Extra configurateur styles not in global sheet ---- */
+    .config-intro {
+      padding: 7rem var(--section-pad-x) 2rem;
+      max-width: 680px;
+    }
+    .config-intro .mono-label { margin-bottom: 1rem; }
+    .config-intro h1 { margin-bottom: 0.75rem; }
+    .config-intro p { margin-bottom: 0; }
+
+    .config-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.75rem;
+    }
+    .config-label-badge {
+      font-family: var(--font-mono);
+      font-size: 0.4375rem;
+      letter-spacing: 0.14em;
+      color: var(--chrome);
+      background: rgba(201,165,106,0.08);
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+    }
+
+    .shape-btn-icon {
+      display: block;
+    }
+
+    .engraving-input {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,165,106,0.14);
+      border-radius: 2px;
+      padding: 0.75rem 1rem;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 0.9375rem;
+      color: var(--creme-os);
+      outline: none;
+      transition: border-color 0.25s;
+      letter-spacing: 0.05em;
+    }
+    .engraving-input::placeholder {
+      color: rgba(234,224,210,0.25);
+      font-style: italic;
+    }
+    .engraving-input:focus {
+      border-color: rgba(201,165,106,0.4);
+    }
+    .engraving-hint {
+      font-family: var(--font-mono);
+      font-size: 0.4375rem;
+      letter-spacing: 0.1em;
+      color: rgba(234,224,210,0.28);
+      margin-top: 0.5rem;
+    }
+
+    .config-divider {
+      height: 1px;
+      background: rgba(201,165,106,0.08);
+      margin: 2.5rem 0;
+    }
+
+    .config-summary {
+      background: rgba(61,15,30,0.3);
+      border: 1px solid rgba(201,165,106,0.1);
+      border-radius: 4px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+    .summary-key {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.12em;
+      color: rgba(234,224,210,0.38);
+      text-transform: uppercase;
+    }
+    .summary-val {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.1em;
+      color: rgba(234,224,210,0.72);
+    }
+
+    .config-preview-label {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(234,224,210,0.25);
+      text-align: center;
+    }
+
+    .config-preview-hint {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 0.8125rem;
+      color: rgba(234,224,210,0.22);
+      text-align: center;
+      max-width: 22ch;
+    }
+
+    /* 3D rotate interaction */
+    .frame-stage.dragging { cursor: grabbing; }
+
+    /* Frame glow pulse */
+    @keyframes framePulse {
+      0%, 100% { box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 0 80px rgba(124,31,59,0.2), inset 0 2px 0 rgba(255,255,255,0.07); }
+      50%       { box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 120px rgba(124,31,59,0.35), inset 0 2px 0 rgba(255,255,255,0.10); }
+    }
+    .frame-live { animation: framePulse 5s ease-in-out infinite; }
+  </style>
+</head>
+<body>
+
+<div id="page-transition"></div>
+<div id="cursor" aria-hidden="true"></div>
+
+<nav id="nav" aria-label="Navigation principale">
+  <a href="index.html" class="nav-logo">
+    <img src="assets/logo.svg" alt="Logo Maison Noor" width="40" height="56">
+    <span class="nav-wordmark">Maison Noor</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Le Seuil</a></li>
+    <li><a href="atelier.html">Atelier</a></li>
+    <li><a href="collection.html">Collection</a></li>
+    <li><a href="maison.html">La Maison</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="rendez-vous.html" class="btn btn-chrome btn-arrow">Rendez-vous</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div id="nav-backdrop" aria-hidden="true"></div>
+<div id="nav-drawer" role="dialog" aria-modal="true" aria-label="Menu">
+  <button id="drawer-close" class="btn btn-ghost">✕</button>
+  <ul class="drawer-links">
+    <li><a href="index.html">Le Seuil</a></li>
+    <li><a href="atelier.html">Atelier</a></li>
+    <li><a href="collection.html">Collection</a></li>
+    <li><a href="maison.html">La Maison</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="rendez-vous.html">Rendez-vous</a></li>
+  </ul>
+</div>
+
+<!-- ============================================================
+     EN-TÊTE
+============================================================ -->
+<header class="config-intro">
+  <p class="mono-label reveal">Expérience · Configurateur</p>
+  <h1 class="heading-md reveal reveal-delay-1">Composez votre<br><em>regard</em></h1>
+  <p class="text-soft reveal reveal-delay-2" style="max-width: 52ch;">
+    Choisissez la silhouette, la matière, la taille. Ajoutez une gravure personnelle. Chaque sélection façonne votre monture en temps réel.
+  </p>
+</header>
+
+<!-- ============================================================
+     CONFIGURATEUR
+============================================================ -->
+<div id="configurateur-wrap">
+
+  <!-- ---- Prévisualisation 3D (sticky) ---- -->
+  <aside class="config-preview" aria-label="Prévisualisation de la monture">
+
+    <p class="config-preview-label">Aperçu en direct</p>
+
+    <div class="frame-stage" id="frame-stage" title="Glissez pour faire pivoter" aria-label="Monture 3D interactive">
+      <div class="frame-live" id="frame-live">
+        <div class="frame-lens left"></div>
+        <div class="frame-lens right"></div>
+        <div class="frame-bridge"></div>
+        <div class="frame-engraving" id="frame-engrav-display"></div>
+      </div>
+    </div>
+
+    <p class="frame-serial" id="frame-serial">MN — SÉRIE LIMITÉE · #0001</p>
+
+    <p class="config-preview-hint" id="preview-mat-hint">Corne naturelle · Taille M</p>
+
+  </aside>
+
+  <!-- ---- Panneau de configuration ---- -->
+  <div class="config-panel">
+
+    <!-- 1. Silhouette -->
+    <section class="config-section">
+      <div class="config-label-row">
+        <p class="config-section-title">01 — Silhouette</p>
+        <span class="config-label-badge" id="shape-badge">Ovale</span>
+      </div>
+
+      <div class="shape-selector" role="group" aria-label="Forme de la monture">
+
+        <button class="shape-btn active" data-shape="oval"
+          data-fr="60% 60% 50% 50% / 40% 40% 60% 60%"
+          data-fw="300px" data-fh="160px"
+          aria-pressed="true" aria-label="Ovale">
+          <svg class="shape-btn-icon" viewBox="0 0 36 22" fill="none">
+            <ellipse cx="18" cy="11" rx="16" ry="9" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <span class="shape-btn-label">Ovale</span>
+        </button>
+
+        <button class="shape-btn" data-shape="square"
+          data-fr="8px"
+          data-fw="280px" data-fh="170px"
+          aria-pressed="false" aria-label="Carré">
+          <svg class="shape-btn-icon" viewBox="0 0 36 22" fill="none">
+            <rect x="3" y="3" width="30" height="16" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <span class="shape-btn-label">Carré</span>
+        </button>
+
+        <button class="shape-btn" data-shape="rect"
+          data-fr="4px"
+          data-fw="320px" data-fh="145px"
+          aria-pressed="false" aria-label="Rectangle">
+          <svg class="shape-btn-icon" viewBox="0 0 36 22" fill="none">
+            <rect x="2" y="5" width="32" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <span class="shape-btn-label">Rectangle</span>
+        </button>
+
+        <button class="shape-btn" data-shape="butterfly"
+          data-fr="4% 4% 50% 50% / 10% 10% 40% 40%"
+          data-fw="310px" data-fh="152px"
+          aria-pressed="false" aria-label="Papillon">
+          <svg class="shape-btn-icon" viewBox="0 0 36 22" fill="none">
+            <path d="M3 14 Q7 2 18 4 Q29 2 33 14 Q29 20 18 18 Q7 20 3 14Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          </svg>
+          <span class="shape-btn-label">Papillon</span>
+        </button>
+
+        <button class="shape-btn" data-shape="octo"
+          data-fr="18%"
+          data-fw="292px" data-fh="162px"
+          aria-pressed="false" aria-label="Octogonal">
+          <svg class="shape-btn-icon" viewBox="0 0 36 22" fill="none">
+            <polygon points="10,2 26,2 34,11 26,20 10,20 2,11" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          </svg>
+          <span class="shape-btn-label">Octogonal</span>
+        </button>
+
+      </div>
+    </section>
+
+    <!-- 2. Matière -->
+    <section class="config-section">
+      <div class="config-label-row">
+        <p class="config-section-title">02 — Matière</p>
+        <span class="config-label-badge" id="material-badge">Corne naturelle</span>
+      </div>
+
+      <div class="material-selector" role="group" aria-label="Matière de la monture">
+
+        <div class="material-swatch active" role="radio" tabindex="0" aria-pressed="true"
+          data-mat="horn-natural" data-mat-label="Corne naturelle" data-mat-premium="0"
+          data-fc="linear-gradient(135deg, #8B6914 0%, #C4952A 40%, #7A5410 70%, #A07820 100%)">
+          <div class="swatch-color" style="background: linear-gradient(135deg, #8B6914 0%, #C4952A 40%, #7A5410 70%, #A07820 100%);"></div>
+          <p class="swatch-label">Corne naturelle</p>
+        </div>
+
+        <div class="material-swatch" role="radio" tabindex="0" aria-pressed="false"
+          data-mat="horn-dark" data-mat-label="Corne foncée" data-mat-premium="200"
+          data-fc="linear-gradient(135deg, #2C1A08 0%, #4A2E10 40%, #1E1005 70%, #3D2510 100%)">
+          <div class="swatch-color" style="background: linear-gradient(135deg, #2C1A08 0%, #4A2E10 40%, #1E1005 70%, #3D2510 100%);"></div>
+          <p class="swatch-label">Corne foncée +200€</p>
+        </div>
+
+        <div class="material-swatch" role="radio" tabindex="0" aria-pressed="false"
+          data-mat="titanium-gold" data-mat-label="Titane or" data-mat-premium="600"
+          data-fc="linear-gradient(135deg, #B8962A 0%, #E8C84C 35%, #9A7A1A 65%, #D4A830 100%)">
+          <div class="swatch-color" style="background: linear-gradient(135deg, #B8962A 0%, #E8C84C 35%, #9A7A1A 65%, #D4A830 100%);"></div>
+          <p class="swatch-label">Titane or +600€</p>
+        </div>
+
+        <div class="material-swatch" role="radio" tabindex="0" aria-pressed="false"
+          data-mat="titanium-night" data-mat-label="Titane nuit" data-mat-premium="400"
+          data-fc="linear-gradient(135deg, #1A1A22 0%, #2E2E3E 40%, #0E0E14 70%, #252535 100%)">
+          <div class="swatch-color" style="background: linear-gradient(135deg, #1A1A22 0%, #2E2E3E 40%, #0E0E14 70%, #252535 100%);"></div>
+          <p class="swatch-label">Titane nuit +400€</p>
+        </div>
+
+        <div class="material-swatch" role="radio" tabindex="0" aria-pressed="false"
+          data-mat="titanium-bordeaux" data-mat-label="Titane bordeaux" data-mat-premium="500"
+          data-fc="linear-gradient(135deg, #7C1F3B 0%, #B54870 40%, #5A0F28 70%, #9A2E50 100%)">
+          <div class="swatch-color" style="background: linear-gradient(135deg, #7C1F3B 0%, #B54870 40%, #5A0F28 70%, #9A2E50 100%);"></div>
+          <p class="swatch-label">Titane bordeaux +500€</p>
+        </div>
+
+        <div class="material-swatch" role="radio" tabindex="0" aria-pressed="false"
+          data-mat="acetate-havana" data-mat-label="Acétate havane" data-mat-premium="100"
+          data-fc="linear-gradient(135deg, #6B3A1F 0%, #A85828 40%, #4E2510 60%, #8B4520 80%, #3D1C0A 100%)">
+          <div class="swatch-color" style="background: linear-gradient(135deg, #6B3A1F 0%, #A85828 40%, #4E2510 60%, #8B4520 80%, #3D1C0A 100%);"></div>
+          <p class="swatch-label">Acétate havane +100€</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. Taille -->
+    <section class="config-section">
+      <div class="config-label-row">
+        <p class="config-section-title">03 — Taille</p>
+        <span class="config-label-badge" id="size-badge">M — Standard</span>
+      </div>
+
+      <div class="size-selector" role="group" aria-label="Taille de la monture">
+        <button class="size-btn" data-size="S" data-size-label="S — Délicat" data-size-premium="0"
+          data-scale="0.88" aria-pressed="false">
+          S<br><span style="font-size:0.4rem;opacity:0.6;">Délicat</span>
+        </button>
+        <button class="size-btn active" data-size="M" data-size-label="M — Standard" data-size-premium="0"
+          data-scale="1.0" aria-pressed="true">
+          M<br><span style="font-size:0.4rem;opacity:0.6;">Standard</span>
+        </button>
+        <button class="size-btn" data-size="L" data-size-label="L — Affirmé" data-size-premium="150"
+          data-scale="1.12" aria-pressed="false">
+          L<br><span style="font-size:0.4rem;opacity:0.6;">Affirmé +150€</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 4. Gravure -->
+    <section class="config-section">
+      <div class="config-label-row">
+        <p class="config-section-title">04 — Gravure personnelle</p>
+        <span class="config-label-badge" id="engrave-badge">Sans · +0€</span>
+      </div>
+
+      <input
+        type="text"
+        class="engraving-input"
+        id="engrave-input"
+        placeholder="Vos initiales, une date, un mot…"
+        maxlength="22"
+        autocomplete="off"
+        spellcheck="false"
+      >
+      <p class="engraving-hint">Maximum 22 caractères · Gravure laser sur branche intérieure · +180€</p>
+    </section>
+
+    <div class="config-divider"></div>
+
+    <!-- Récapitulatif -->
+    <section class="config-section">
+      <p class="config-section-title">Récapitulatif</p>
+
+      <div class="config-summary" id="config-summary">
+        <div class="summary-row">
+          <span class="summary-key">Silhouette</span>
+          <span class="summary-val" id="sum-shape">Ovale</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-key">Matière</span>
+          <span class="summary-val" id="sum-mat">Corne naturelle</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-key">Taille</span>
+          <span class="summary-val" id="sum-size">M — Standard</span>
+        </div>
+        <div class="summary-row" id="sum-engrave-row" style="display:none">
+          <span class="summary-key">Gravure</span>
+          <span class="summary-val" id="sum-engrave"></span>
+        </div>
+        <div class="summary-row" id="sum-delivery-row" style="margin-top:0.75rem; padding-top:0.75rem; border-top: 1px solid rgba(201,165,106,0.08);">
+          <span class="summary-key">Délai de fabrication</span>
+          <span class="summary-val">6 à 10 semaines</span>
+        </div>
+      </div>
+
+      <!-- Prix -->
+      <p class="config-price" id="config-price">2 400 €</p>
+      <p class="config-price-detail" id="config-price-detail">
+        Monture sur-mesure · Corne naturelle · Taille M · Sans gravure
+      </p>
+
+      <!-- CTA -->
+      <a href="rendez-vous.html" class="btn btn-filled btn-arrow" id="config-cta" style="width:100%; text-align:center; margin-bottom: 1rem;">
+        Commander cette configuration
+      </a>
+      <p style="font-family: var(--font-mono); font-size: 0.45rem; letter-spacing: 0.1em; color: rgba(234,224,210,0.22); text-align: center;">
+        La commande s'effectue lors de votre rendez-vous en atelier · Paiement à 50% à la confirmation
+      </p>
+
+    </section>
+
+  </div><!-- /config-panel -->
+</div><!-- /#configurateur-wrap -->
+
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer style="padding: 3rem var(--section-pad-x); border-top: 1px solid rgba(201,165,106,0.08); margin-top: 6rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+  <p class="mono-label dim" style="font-size: 0.5rem;">© 2025 Maison Noor · Tous droits réservés</p>
+  <nav aria-label="Liens légaux">
+    <a href="legal.html" style="font-family:var(--font-mono);font-size:0.5rem;letter-spacing:0.1em;color:rgba(234,224,210,0.28);margin-left:1.5rem;">Mentions légales</a>
+    <a href="contact.html" style="font-family:var(--font-mono);font-size:0.5rem;letter-spacing:0.1em;color:rgba(234,224,210,0.28);margin-left:1.5rem;">Contact</a>
+  </nav>
+</footer>
+
+<script src="assets/js/main.js"></script>
+
+<script>
+/* ================================================================
+   CONFIGURATEUR — LOGIQUE INTERACTIVE
+================================================================ */
+(function() {
+  const frame      = document.getElementById('frame-live');
+  const stage      = document.getElementById('frame-stage');
+  const engravDisp = document.getElementById('frame-engrav-display');
+  const serialEl   = document.getElementById('frame-serial');
+  const matHint    = document.getElementById('preview-mat-hint');
+  const priceEl    = document.getElementById('config-price');
+  const detailEl   = document.getElementById('config-price-detail');
+  const shapeBadge    = document.getElementById('shape-badge');
+  const materialBadge = document.getElementById('material-badge');
+  const sizeBadge     = document.getElementById('size-badge');
+  const engraveBadge  = document.getElementById('engrave-badge');
+  const sumShape   = document.getElementById('sum-shape');
+  const sumMat     = document.getElementById('sum-mat');
+  const sumSize    = document.getElementById('sum-size');
+  const sumEngrave = document.getElementById('sum-engrave');
+  const sumEngraveRow = document.getElementById('sum-engrave-row');
+
+  const BASE_PRICE = 2400;
+
+  const state = {
+    shape:       'oval',
+    shapeLabel:  'Ovale',
+    fw:          '300px',
+    fh:          '160px',
+    fr:          '60% 60% 50% 50% / 40% 40% 60% 60%',
+    fc:          'linear-gradient(135deg, #8B6914 0%, #C4952A 40%, #7A5410 70%, #A07820 100%)',
+    matLabel:    'Corne naturelle',
+    matPremium:  0,
+    sizeLabel:   'M — Standard',
+    sizePremium: 0,
+    sizeScale:   1.0,
+    engrave:     '',
+    engraved:    false,
+  };
+
+  function formatPrice(n) {
+    return n.toLocaleString('fr-FR') + ' €';
+  }
+
+  function updateFrame() {
+    const scale = state.sizeScale;
+    const fw = parseFloat(state.fw) * scale + 'px';
+    const fh = parseFloat(state.fh) * scale + 'px';
+    frame.style.setProperty('--fw', fw);
+    frame.style.setProperty('--fh', fh);
+    frame.style.setProperty('--fr', state.fr);
+    frame.style.setProperty('--fc', state.fc);
+    engravDisp.textContent = state.engrave;
+    matHint.textContent = state.matLabel + ' · Taille ' + (state.sizeLabel.charAt(0));
+
+    const serial = 'MN — ' + state.shapeLabel.toUpperCase().substring(0, 4) + ' · #' +
+      String(Math.floor(Math.random() * 80) + 1).padStart(4, '0');
+    serialEl.textContent = serial;
+  }
+
+  function updatePrice() {
+    const engravePremium = state.engraved ? 180 : 0;
+    const total = BASE_PRICE + state.matPremium + state.sizePremium + engravePremium;
+    priceEl.textContent = formatPrice(total);
+
+    const parts = ['Monture sur-mesure', state.matLabel, 'Taille ' + state.sizeLabel.charAt(0)];
+    if (state.engraved) parts.push('Gravure « ' + state.engrave + ' »');
+    else parts.push('Sans gravure');
+    detailEl.textContent = parts.join(' · ');
+  }
+
+  function updateSummary() {
+    shapeBadge.textContent    = state.shapeLabel;
+    materialBadge.textContent = state.matLabel;
+    sizeBadge.textContent     = state.sizeLabel;
+    sumShape.textContent      = state.shapeLabel;
+    sumMat.textContent        = state.matLabel;
+    sumSize.textContent       = state.sizeLabel;
+
+    if (state.engraved && state.engrave) {
+      sumEngrave.textContent  = '« ' + state.engrave + ' »';
+      sumEngraveRow.style.display = 'flex';
+      engraveBadge.textContent = '« ' + state.engrave + ' » · +180€';
+    } else {
+      sumEngraveRow.style.display = 'none';
+      engraveBadge.textContent = 'Sans · +0€';
+    }
+  }
+
+  /* ---- Shape selector ---- */
+  document.querySelectorAll('.shape-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.shape-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+
+      state.shape      = btn.dataset.shape;
+      state.shapeLabel = btn.querySelector('.shape-btn-label').textContent;
+      state.fr         = btn.dataset.fr;
+      state.fw         = btn.dataset.fw;
+      state.fh         = btn.dataset.fh;
+
+      updateFrame();
+      updatePrice();
+      updateSummary();
+    });
+  });
+
+  /* ---- Material selector ---- */
+  document.querySelectorAll('.material-swatch').forEach(sw => {
+    sw.addEventListener('click', () => {
+      document.querySelectorAll('.material-swatch').forEach(s => {
+        s.classList.remove('active');
+        s.setAttribute('aria-pressed', 'false');
+      });
+      sw.classList.add('active');
+      sw.setAttribute('aria-pressed', 'true');
+
+      state.fc         = sw.dataset.fc;
+      state.matLabel   = sw.dataset.matLabel;
+      state.matPremium = parseInt(sw.dataset.matPremium, 10);
+
+      updateFrame();
+      updatePrice();
+      updateSummary();
+    });
+    sw.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sw.click(); }
+    });
+  });
+
+  /* ---- Size selector ---- */
+  document.querySelectorAll('.size-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.size-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+
+      state.sizeLabel   = btn.dataset.sizeLabel;
+      state.sizePremium = parseInt(btn.dataset.sizePremium, 10);
+      state.sizeScale   = parseFloat(btn.dataset.scale);
+
+      updateFrame();
+      updatePrice();
+      updateSummary();
+    });
+  });
+
+  /* ---- Engraving input ---- */
+  const engraveInput = document.getElementById('engrave-input');
+  engraveInput.addEventListener('input', () => {
+    const val = engraveInput.value.trim();
+    state.engrave  = val;
+    state.engraved = val.length > 0;
+    updateFrame();
+    updatePrice();
+    updateSummary();
+  });
+
+  /* ---- 3D drag-to-rotate ---- */
+  let dragging = false;
+  let startX = 0, startY = 0;
+  let rotX = -8, rotY = 5;
+
+  stage.addEventListener('mousedown', e => {
+    dragging = true;
+    startX = e.clientX;
+    startY = e.clientY;
+    stage.classList.add('dragging');
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    const dx = (e.clientX - startX) * 0.35;
+    const dy = (e.clientY - startY) * 0.35;
+    const newRotY = Math.max(-35, Math.min(35, rotY + dx));
+    const newRotX = Math.max(-30, Math.min(15, rotX - dy));
+    frame.style.setProperty('--ft', `perspective(800px) rotateX(${newRotX}deg) rotateY(${newRotY}deg)`);
+    startX = e.clientX;
+    startY = e.clientY;
+    rotY = newRotY;
+    rotX = newRotX;
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (!dragging) return;
+    dragging = false;
+    stage.classList.remove('dragging');
+    /* Spring-back to slight default tilt */
+    const targetX = -8, targetY = 5;
+    const springBack = () => {
+      rotX += (targetX - rotX) * 0.08;
+      rotY += (targetY - rotY) * 0.08;
+      frame.style.setProperty('--ft', `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg)`);
+      if (Math.abs(rotX - targetX) > 0.2 || Math.abs(rotY - targetY) > 0.2) {
+        requestAnimationFrame(springBack);
+      }
+    };
+    requestAnimationFrame(springBack);
+  });
+
+  /* Touch drag */
+  let touchStartX = 0, touchStartY = 0;
+  stage.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  stage.addEventListener('touchmove', e => {
+    const dx = (e.touches[0].clientX - touchStartX) * 0.45;
+    const dy = (e.touches[0].clientY - touchStartY) * 0.45;
+    rotY = Math.max(-35, Math.min(35, rotY + dx));
+    rotX = Math.max(-30, Math.min(15, rotX - dy));
+    frame.style.setProperty('--ft', `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg)`);
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  /* ---- GSAP intro animation ---- */
+  if (typeof gsap !== 'undefined') {
+    gsap.fromTo(frame,
+      { opacity: 0, scale: 0.75, y: 40 },
+      { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: 'power4.out', delay: 0.6 }
+    );
+    gsap.fromTo('.config-panel .config-section',
+      { opacity: 0, y: 24 },
+      { opacity: 1, y: 0, stagger: 0.12, duration: 0.8, ease: 'power3.out', delay: 0.8 }
+    );
+  }
+
+  /* ---- Init ---- */
+  updateFrame();
+  updatePrice();
+  updateSummary();
+
+})();
+</script>
+
+</body>
+</html>
