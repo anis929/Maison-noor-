@@ -136,7 +136,7 @@ export default function ProductPage({ params }: ProductPageProps) {
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 mb-4">
             <ChromeButton variant="filled" size="lg" className="flex-1 justify-center">
               Acquerir
             </ChromeButton>
@@ -144,6 +144,20 @@ export default function ProductPage({ params }: ProductPageProps) {
               Demander une consultation
             </ChromeButton>
           </div>
+
+          {/* Configurator CTA */}
+          <Link
+            href="/configurateur"
+            className="flex items-center justify-center gap-2 w-full py-3 border border-dashed border-orange-brule/40 text-orange-brule/70 hover:text-orange-brule hover:border-orange-brule/70 transition-all duration-200 group mb-8"
+          >
+            <svg className="w-4 h-4 opacity-70 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+            </svg>
+            <span className="font-mono text-[0.65rem] tracking-[0.18em] uppercase">
+              Personnaliser ce modèle
+            </span>
+          </Link>
 
           <p className="text-creme-os/25 font-mono text-[0.65rem] tracking-[0.15em] uppercase">
             Façonnee a la main · Certificat numerote inclus · Garantie 5 ans

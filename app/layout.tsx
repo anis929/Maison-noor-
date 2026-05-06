@@ -3,7 +3,7 @@ import { Bricolage_Grotesque, Inter, Space_Mono } from 'next/font/google'
 import { Navigation } from '@/components/navigation/Navigation'
 import { Footer } from '@/components/footer/Footer'
 import { CustomCursor } from '@/components/ui/CustomCursor'
-import { PageTransition } from '@/components/ui/PageTransition'
+import { LayoutWrapper } from '@/components/ui/LayoutWrapper'
 import './globals.css'
 
 const displayFont = Bricolage_Grotesque({
@@ -63,9 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <CustomCursor />
         <Navigation />
-        <PageTransition>
-          <main>{children}</main>
-        </PageTransition>
+        <LayoutWrapper>{children}</LayoutWrapper>
         <Footer />
       </body>
     </html>
