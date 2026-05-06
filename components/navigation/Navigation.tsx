@@ -56,6 +56,17 @@ export function Navigation() {
             </Link>
           ))}
           <Link
+            href="/configurateur"
+            className={cn(
+              'font-mono text-[0.7rem] tracking-[0.2em] uppercase border px-5 py-2.5 transition-colors duration-200',
+              pathname === '/configurateur'
+                ? 'border-orange-brule text-orange-brule'
+                : 'border-orange-brule/50 text-orange-brule/70 hover:border-orange-brule hover:text-orange-brule',
+            )}
+          >
+            Configurateur
+          </Link>
+          <Link
             href="/rendez-vous"
             className="font-mono text-[0.7rem] tracking-[0.2em] uppercase border border-chrome/30 px-5 py-2.5 text-creme-os/70 hover:border-orange-brule hover:text-orange-brule transition-colors duration-200"
           >
@@ -84,7 +95,7 @@ export function Navigation() {
         )}
         aria-hidden={!menuOpen}
       >
-        {[...links, { href: '/rendez-vous', label: 'Rendez-vous' }].map((link, i) => (
+        {[...links, { href: '/configurateur', label: 'Configurateur' }, { href: '/rendez-vous', label: 'Rendez-vous' }].map((link, i) => (
           <Link
             key={link.href}
             href={link.href}
